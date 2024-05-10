@@ -1,0 +1,24 @@
+<header class="header">
+  <div class="container-fluid">
+    <div class="header-inner">
+      <a routerLink="/" class="logo">
+        <img src="assets/imgs/logo.png" alt="Weather App" />
+        <h1>Weather<br />App</h1>
+      </a>
+      <nav class="nav">
+        <a
+          *ngFor="let item of navItems"
+          [routerLink]="item.path"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="nav-item"
+          >{{ item.title }}
+        </a>
+      </nav>
+      <div class="auth">
+        <a routerLink="/login" class="auth-item">Giriş Yap</a>
+        <a routerLink="/signup" class="auth-item">Kayıt Ol</a>
+      </div>
+    </div>
+  </div>
+</header>
