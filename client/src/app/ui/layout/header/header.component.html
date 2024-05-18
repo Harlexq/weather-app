@@ -1,0 +1,100 @@
+<header class="header" #header>
+  <div class="container-fluid">
+    <div class="header-inner" #headerInner>
+      <button class="mobile-menu-toggle" (click)="mobileMenu()">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <a routerLink="/" class="logo">
+        <img src="assets/imgs/logo.png" alt="Weather App" />
+        <h1>Weather<br />App</h1>
+      </a>
+      <nav class="nav">
+        <a
+          *ngFor="let item of navItems"
+          [routerLink]="item.path"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="nav-item"
+          >{{ item.title }}
+        </a>
+      </nav>
+      <div class="auth" *ngIf="getToken(); else notToken">
+        <a routerLink="/auth" class="auth-item">Giriş Yap</a>
+      </div>
+      <ng-template #notToken>
+        <button class="user" (click)="userDropwon()">
+          <img src="https://freesvg.org/img/abstract-user-flat-4.png" alt="" />
+          <i class="fa-solid fa-angle-down"></i>
+          <div class="user-dropdown" *ngIf="dropdown">
+            <div class="dropdown">
+              <a routerLink="/" class="dropdown-item">
+                Profili Düzenle
+                <i class="fa-regular fa-pen-to-square"></i>
+              </a>
+              <button class="dropdown-item">
+                Çıkış Yap
+                <i class="fa-solid fa-right-from-bracket"></i>
+              </button>
+            </div>
+          </div>
+        </button>
+      </ng-template>
+    </div>
+  </div>
+  <div class="mobile-menu" *ngIf="menu">
+    <div class="mobile-menu-container">
+      <div class="head">
+        <h2>Ana Menü</h2>
+        <button class="mobile-menu-close" (click)="mobileMenu()">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <form class="search" [formGroup]="searchForm" (ngSubmit)="search()">
+        <button
+          type="submit"
+          class="button-search"
+          [disabled]="!searchForm.valid"
+        >
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <input
+          type="text"
+          class="input-search"
+          placeholder="Şehir Adı Giriniz"
+          formControlName="name"
+        />
+        <button
+          type="button"
+          class="search-value"
+          (click)="clearInput()"
+          *ngIf="this.searchForm.get('name')?.value"
+        >
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </form>
+      <div class="nav">
+        <a
+          *ngFor="let item of navItems"
+          [routerLink]="item.path"
+          class="nav-item"
+        >
+          {{ item.title }}
+        </a>
+      </div>
+      <div class="social-media">
+        <a href="#" target="_blank" class="social-media-item">
+          <i class="fa-brands fa-github"></i>
+        </a>
+        <a href="#" target="_blank" class="social-media-item">
+          <i class="fa-brands fa-linkedin-in"></i>
+        </a>
+        <a href="#" target="_blank" class="social-media-item">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="#" target="_blank" class="social-media-item">
+          <i class="fa-brands fa-x-twitter"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>

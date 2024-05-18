@@ -1,0 +1,56 @@
+<footer class="footer">
+  <div class="container-fluid">
+    <menu class="footer-inner">
+      <a routerLink="/" class="logo">
+        <img src="./assets/imgs/logo.png" alt="Weather App" />
+        <h1>Weather<br />App</h1>
+      </a>
+      <nav class="nav">
+        <h2 class="title">Bize Ulaşın</h2>
+        <address class="nav-item">Şehitkamil/Gaziantep</address>
+        <a class="nav-item" href="tel:05111111111" target="_blank"
+          >0511 111 11 11</a
+        >
+        <a
+          class="nav-item"
+          href="mailto:info@serhanbakir.com.tr"
+          target="_blank"
+          >info@serhanbakir.com.tr</a
+        >
+      </nav>
+      <nav class="nav">
+        <h2 class="title">Hızlı Menü</h2>
+        <a
+          class="nav-item"
+          *ngFor="let item of navItems"
+          [routerLink]="item.path"
+          >{{ item.title }}
+        </a>
+      </nav>
+      <nav class="nav">
+        <h2 class="title">Bizi Takip Edin</h2>
+        <div class="social-media">
+          <a href="#" target="_blank" class="social-media-item">
+            <i class="fa-brands fa-github"></i>
+          </a>
+          <a href="#" target="_blank" class="social-media-item">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+          <a href="#" target="_blank" class="social-media-item">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a href="#" target="_blank" class="social-media-item">
+            <i class="fa-brands fa-x-twitter"></i>
+          </a>
+        </div>
+      </nav>
+    </menu>
+  </div>
+</footer>
+<div class="copyright">
+  <p>
+    Copyright © 2024 |
+    <a href="https://serhanbakir.com.tr" target="_blank">Serhan Bakır</a> ve
+    <a href="https://www.smartict.com.tr/">SmartICT</a>
+  </p>
+</div>

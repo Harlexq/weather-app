@@ -1,0 +1,57 @@
+<div class="feedback">
+  <div class="">
+    <div class="">
+      <h2>Geri Bildirim</h2>
+    </div>
+    <div class="form-container">
+      <form [formGroup]="feedbackForm" (ngSubmit)="send()" class="form">
+        <div class="" style="width: 100%">
+          <input-control
+            placeholder="İsim"
+            [fb]="FirstName"
+            [form]="feedbackForm"
+          />
+        </div>
+        <div class="">
+          <input-control
+            placeholder="Soyisim"
+            [fb]="LastName"
+            [form]="feedbackForm"
+          />
+        </div>
+        <div class="">
+          <input-control
+            type="email"
+            placeholder="E-Mail"
+            [fb]="Email"
+            [form]="feedbackForm"
+          />
+        </div>
+        <div class="">
+          <input-control
+            type="tel"
+            placeholder="Telefon No"
+            [fb]="Phone"
+            [form]="feedbackForm"
+          />
+        </div>
+        <div class="">
+          <textarea [formControl]="Message" placeholder="Mesaj"></textarea>
+        </div>
+        <div class="">
+          <div class="rating">
+            <button
+              class="star"
+              *ngFor="let numbers of [1, 2, 3, 4, 5]; let i = index"
+              (click)="setRating(i + 1)"
+              [ngClass]="{ filled: i < selectedRating }"
+            >
+              &#9733;
+            </button>
+          </div>
+          <input-control type="hidden" [fb]="Rating" [form]="feedbackForm" />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

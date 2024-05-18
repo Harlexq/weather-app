@@ -1,0 +1,15 @@
+<div *ngIf="inputId; else notInputId" [formGroup]="form">
+  <label [for]="inputId">{{ labelName }}</label>
+  <input
+    [type]="type"
+    [placeholder]="placeholder"
+    class="input"
+    [id]="inputId"
+    [formControl]="fb"
+  />
+</div>
+<ng-template #notInputId>
+  <div [formGroup]="form">
+    <input [type]="type" [placeholder]="placeholder" class="input" />
+  </div>
+</ng-template>

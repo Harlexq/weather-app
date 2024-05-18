@@ -1,0 +1,38 @@
+.feedback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  h2 {
+    text-align: center;
+    font-size: 45px;
+    color: #4e75ff;
+    margin: 10px 0;
+  }
+
+  .form-container {
+    width: 600px;
+    max-width: 90%;
+    margin: 0 auto;
+    .form {
+      width: 600px;
+      max-width: 90%;
+      margin: 0 auto;
+      .rating {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        .star {
+          cursor: pointer;
+          font-size: 30px;
+          color: #ccc;
+          background-color: transparent;
+          border: none;
+          &.filled {
+            color: #ffbb00;
+          }
+        }
+      }
+    }
+  }
+}
