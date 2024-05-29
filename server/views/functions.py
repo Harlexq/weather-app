@@ -2,6 +2,8 @@ from datetime import datetime
 import hashlib
 import os
 
+ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png'}
+
 def getDate():
     now = datetime.now()
     
@@ -38,3 +40,6 @@ def check_username(username):
         return False, "Kullanıcı adı bir harfle başlamalıdır."
     
     return True, "Kullanıcı adı geçerlidir."
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS

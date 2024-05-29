@@ -1,16 +1,19 @@
-from flask import Flask
+from flask import make_response, jsonify, request
 from flask_restful import Resource, reqparse
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required
 from flask_cors import CORS
 from dotenv import load_dotenv
 from datetime import datetime
 from passlib.hash import md5_crypt
+from avatar_generator import Avatar
+
 
 from config import create_app, init_api, init_mysql
-from views.functions import getDate, generate_salt, generate_salted_token, check_username
+from views.functions import getDate, generate_salt, generate_salted_token, check_username, allowed_file
 
 import datetime
 import hashlib
+import uuid
 import os
 
 app = create_app()
@@ -85,7 +88,7 @@ class Register(Resource):
                 cursor.close()
                 return {'error': 'Kullanici adi duzgun gonderilmemis'}, 400
     
-            profileImage = SITE_URL + "/static/uploads/profile.png"
+            profileImage = "/avatar/{}".format(str(name))
             createdDate = getDate()
     
             salt = generate_salt()
@@ -124,6 +127,7 @@ class Register(Resource):
             return {'error': 'Bir hata olustu: {}'.format(str(e))}, 500
 
 class Login(Resource):
+    @jwt_required()
     def post(self):
         try:
             parser = reqparse.RequestParser()
@@ -138,17 +142,102 @@ class Login(Resource):
             cursor = mysql.connection.cursor()
 
             query = "SELECT * FROM users WHERE name = %s"
-            result = ""
+            result = cursor.execute(query, (name,))
+
+            if result > 0:
+                data = cursor.fetchone()
+
+                if md5_crypt.verify(password, data['password']):
+                    cursor.close()
+
+                    user_dict = [
+                        {
+                            'id': data['id'],
+                            'name': data['name'],
+                            'profileImage': data['profileImage'],
+                            'email': data['email'],
+                            'createdDate': data['createdDate'],
+                            'token': data['token']
+                        }
+                    ]
+
+                    return jsonify(user_dict)
+                
+                else:
+                    cursor.close()
+                    return {'error': 'sifre hatali'}, 400
+
+            else:
+                cursor.close()
+                return {'error': 'kullanici adi bulunamadi'}, 200
 
 
         except Exception as e:
             return {'error': 'Bir hata olustu: {}'.format(str(e))}, 500
+        
+class GetProfilePhoto(Resource):
+    def get(self, photoName):
+        avatar = Avatar.generate(128, photoName, "PNG")
+        headers = { 'Content-Type': 'image/png' }
 
+        return make_response(avatar, 200, headers)
+    
+class AddProfilePhoto(Resource):
+    @jwt_required()
+    def post(self, id):
+        try:
+            if 'file' not in request.files:
+                return {"message": "No file part"}, 400
+        
+            file = request.files['file']
+            if file.filename == '':
+                return {"message": "No selected file"}, 400
+            
+            if file and allowed_file(file.filename):
+                filename = str(uuid.uuid4()) + os.path.splitext(file.filename)[1]
+
+                cursor = mysql.connection.cursor()
+
+                fileurl = "static/uploads/" + filename
+
+                query = "UPDATE users SET profileImage = %s WHERE id = %s"
+                cursor.execute(query, (fileurl, id))
+
+                if cursor.rowcount > 0:
+                    mysql.connection.commit()
+                    cursor.close()
+
+                else:
+                    cursor.close()
+                    return {'message': 'mysql beklenmedik bir sekilde hata verdi veya id yanlis'}, 400
+
+
+                file.save(os.path.join('static/uploads', filename))
+                return {"message": "File uploaded successfully", "filename": filename}, 200
+
+            else:
+                return {'message': 'Invalid file type. Only .jpg, .jpeg, .png files are allowed.'}, 400
+
+        except Exception as e:
+            return {'message': 'Bir hata olustu: {}'.format(str(e))}, 500
+
+class ChangePassword():
+    def post(self):
+        try:
+            pas = "2"
+    
+        except Exception as e:
+            return {'message': 'Bir hata olustu: {}'.format(str(e))}, 500
 
 api.add_resource(Index, '/')
 api.add_resource(LoginAPI, "/author")
 
 api.add_resource(Register, "/register")
+api.add_resource(Login, "/login")
+
+api.add_resource(GetProfilePhoto, "/avatar/<photoName>")
+
+api.add_resource(AddProfilePhoto, "/user/edit/profilePhoto/<id>")
 
 
 
