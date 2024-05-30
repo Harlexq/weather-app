@@ -102,7 +102,7 @@ export class HeaderComponent {
       this.header.nativeElement &&
       this.headerInner.nativeElement
     ) {
-      if (currentScroll > 110) {
+      if (currentScroll > 80) {
         this.renderer.setStyle(
           this.header.nativeElement,
           'backgroundColor',

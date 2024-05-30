@@ -1,44 +1,133 @@
-<div class="weat">
-  <div class="sidebar">
-    <div class="head">
-      <div class="input-field">
-        <div class="input-group">
-          <input type="text" placeholder="Şehir arayın..." class="input" />
-          <button type="button" class="clear-input">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
+<section class="weat">
+  <aside class="sidebar">
+    <form
+      class="input-field"
+      [formGroup]="citfySearhForm"
+      (ngSubmit)="search()"
+    >
+      <input
+        type="text"
+        placeholder="Şehir adı giriniz..."
+        class="input"
+        [formControl]="Name"
+      />
+      <button
+        class="clear-input"
+        type="button"
+        *ngIf="Name.value"
+        (click)="clearInput()"
+      >
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <button class="search-input" type="submit">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </form>
+
+    <div class="aside-content">
+      <h2 class="title">Anlık Hava Durumu</h2>
+      <div class="instant">
+        <img src="assets/icons/thunderstorm.png" />
+      </div>
+      <div class="instant-info" *ngIf="currentWeather">
+        <div class="instant-head">
+          <h3>{{ currentWeather.city_name }}</h3>
+          <div class="head-item">
+            <p>Anlık</p>
+            <p class="instant-date">
+              {{ currentWeather.datetime.replaceAll("-", "/") }}
+            </p>
+          </div>
         </div>
-        <button type="submit" class="input-search">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
+        <div class="instant-foot">
+          <h2 class="title">Hava Durumu Bilgisi</h2>
+          <div class="degree">
+            Derece: <strong>{{ currentWeather.temp }}°</strong>
+          </div>
+          <article class="instant-item">
+            <img src="assets/icons/wat.png" />
+            <h4>{{ currentWeather.weather.description }}</h4>
+          </article>
+        </div>
       </div>
     </div>
-    <div class="content">
-      <img src="assets/icons/thunderstorm.png" class="content-img" alt="" />
-      <div class="weat-infor">
-        <h2>Mevcut Hava Durumu</h2>
-        <h3>12°</h3>
-        <p><strong>Pazartesi,</strong> 16:00</p>
-      </div>
-      <div class="weat-info">
-        <h2>Güncel Hava Tahmini</h2>
-        <article class="weat-info-item">
-          <img src="assets/icons/mostly-cloudy.png" class="item-img" />
-          Çoğunlukla Bulutlu
-        </article>
-        <article class="weat-info-item">
-          <img src="assets/icons/rain.png" class="item-img" />
-          Yağmur - 30%
-        </article>
-      </div>
+  </aside>
+  <main class="main">
+    <div class="tab">
+      <button
+        class="tab-btn"
+        (click)="setActiveButton('firstButton')"
+        [ngClass]="{ active: activeButton === 'firstButton' }"
+      >
+        Bugün
+      </button>
+      <button
+        class="tab-btn"
+        (click)="setActiveButton('lastButton')"
+        [ngClass]="{ active: activeButton === 'lastButton' }"
+      >
+        Haftalık
+      </button>
     </div>
+    <div class="tab-main">
+      <div class="today" *ngIf="dailyWeatherData && dailyWeather">
+        <div class="head">
+          <h2>{{ dailyWeather.city_name }}</h2>
+          <p>{{ dailyWeatherData.valid_date.replaceAll("-", "/") }}</p>
+        </div>
+        <div class="content">
+          <h2 class="title">Hava Durumu Bilgisi</h2>
+          <div class="weak-info">
+            <article class="weak-info-item">
+              <strong>Sıcaklık:</strong>
+              {{ dailyWeatherData.temp }} °C
+            </article>
+            <article class="weak-info-item">
+              <strong>Maximum Sıcaklık: </strong>
+              {{ dailyWeatherData.max_temp }} °C
+            </article>
+            <article class="weak-info-item">
+              <strong>Minumum Sıcaklık:</strong>
+              {{ dailyWeatherData.min_temp }} °C
+            </article>
+            <article class="weak-info-item">
+              <strong>Nem:</strong>
+              {{ dailyWeatherData.rh }} %
+            </article>
+            <article class="weak-info-item">
+              <strong>Rüzgar Hızı:</strong>
+              {{ dailyWeatherData.wind_spd }}
+            </article>
+            <article class="weak-info-item">
+              <strong>Rüzgar Yönü:</strong>
+              {{ dailyWeatherData.wind_cdir }}
+            </article>
+            <article class="weak-info-item">
+              <strong>Basınç:</strong>
+              {{ dailyWeatherData.pres }} hPa
+            </article>
+            <article class="weak-info-item">
+              <strong>Görüş Mesafesi:</strong>
+              {{ dailyWeatherData.vis }} km
+            </article>
+          </div>
+        </div>
+      </div>
+      <div class="weekly"></div>
+    </div>
+  </main>
+</section>
+
+<!-- <div class="today" *ngIf="weeklyWeather">
+  <div class="head">
+    <h2>weeklyWeather</h2>
+    <h2>{{ weeklyWeather.city_name }}</h2>
+    <p>Pazartesi</p>
   </div>
   <div class="content">
-    <div class="head">
-      <div class="daily-btn">
-        <button class="active">Anlık</button>
-        <button>Haftalık</button>
-      </div>
+    <h2 class="title">Hava Durumu Bilgisi</h2>
+    <div class="weak-info" *ngFor="let day of weeklyWeather.data">
+      {{ day.temp }}
     </div>
   </div>
-</div>
+</div> -->

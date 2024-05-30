@@ -1,35 +1,95 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map, switchMap } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { LatLon } from '../models/LatLon';
+import { GeocodingService } from './geocoding.service';
+import { CurrentWeather, CurrentWeatherData } from '../models/CurrentWeather';
+import { DailyWeather } from '../models/DailyWeather';
+import { WeeklyWeather } from '../models/WeeklyWeather';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WeatherService {
-  openWeatherApiUrl: string = environment.openWeatherApiUrl;
-  openWeatherApiKey: string = environment.openWeatherApiKey;
   weatherBitApiUrl: string = environment.weatherBitApiUrl;
   weatherBitApiKey: string = environment.weatherBitApiKey;
+  weatherBitApiHost: string = 'weatherbit-v1-mashape.p.rapidapi.com';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private geocodingService: GeocodingService
+  ) {}
 
-  getLatLon(city: string): Observable<LatLon[]> {
-    return this.http.get<LatLon[]>(
-      `${this.openWeatherApiUrl}?q=${city}&appid=${this.openWeatherApiKey}&units=metric&lang=tr`
+  headers: HttpHeaders = new HttpHeaders()
+    .set('X-RapidAPI-Key', this.weatherBitApiKey)
+    .set('X-RapidAPI-Host', this.weatherBitApiHost);
+
+  getCurrentWeather(city: string): Observable<CurrentWeather> {
+    return this.geocodingService.getCoordinates(city).pipe(
+      switchMap((coords) => {
+        const params = new HttpParams()
+          .set('lon', String(coords.lon))
+          .set('lat', String(coords.lat))
+          .set('units', 'metric')
+          .set('lang', 'tr');
+
+        return this.http.get<CurrentWeatherData>(
+          `${this.weatherBitApiUrl}/current`,
+          {
+            params,
+            headers: this.headers,
+          }
+        );
+      }),
+      map((res) => res.data[0])
     );
   }
 
-  getCurrentWeather(lat: number, lon: number): Observable<Object> {
-    return this.http.get(
-      `${this.weatherBitApiUrl}?lon=${lon}&lat=${lat}&units=metric&lang=tr`,
-      {
-        headers: {
-          'X-RapidAPI-Key': this.weatherBitApiKey,
-          'X-RapidAPI-Host': 'weatherbit-v1-mashape.p.rapidapi.com',
-        },
-      }
+  getDailyWeather(city: string): Observable<DailyWeather> {
+    return this.geocodingService.getCoordinates(city).pipe(
+      switchMap((coords) => {
+        const params = new HttpParams()
+          .set('lon', String(coords.lon))
+          .set('lat', String(coords.lat))
+          .set('units', 'metric')
+          .set('lang', 'tr');
+
+        return this.http.get<DailyWeather>(
+          `${this.weatherBitApiUrl}/forecast/daily`,
+          {
+            params: params,
+            headers: this.headers,
+          }
+        );
+      }),
+      map((res) => {
+        res.data = res.data.slice(0, 1);
+        return res;
+      })
+    );
+  }
+
+  getWeeklyWeather(city: string): Observable<WeeklyWeather> {
+    return this.geocodingService.getCoordinates(city).pipe(
+      switchMap((coords) => {
+        const params = new HttpParams()
+          .set('lon', String(coords.lon))
+          .set('lat', String(coords.lat))
+          .set('units', 'metric')
+          .set('lang', 'tr');
+
+        return this.http.get<WeeklyWeather>(
+          `${this.weatherBitApiUrl}/forecast/daily`,
+          {
+            params: params,
+            headers: this.headers,
+          }
+        );
+      }),
+      map((res) => {
+        res.data = res.data.slice(0, 7);
+        return res;
+      })
     );
   }
 }
