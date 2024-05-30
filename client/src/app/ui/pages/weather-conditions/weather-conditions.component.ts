@@ -8,7 +8,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { CurrentWeather } from 'src/app/models/CurrentWeather';
 import { DailyWeather, DailyWeatherData } from 'src/app/models/DailyWeather';
-import { WeeklyWeather } from 'src/app/models/WeeklyWeather';
+import { WeeklyWeather, WeeklyWeatherData } from 'src/app/models/WeeklyWeather';
 import { WeatherService } from 'src/app/services/weather.service';
 
 @Component({
@@ -18,11 +18,13 @@ import { WeatherService } from 'src/app/services/weather.service';
 })
 export class WeatherConditionsComponent {
   citfySearhForm!: FormGroup;
-  activeButton: string = 'firstButton';
+  activeButton: string = 'daily';
   currentWeather: CurrentWeather | null = null;
   dailyWeather: DailyWeather | null = null;
   weeklyWeather: WeeklyWeather | null = null;
+  weeklyWeatherData: WeeklyWeatherData | undefined = undefined;
   dailyWeatherData: DailyWeatherData | null = null;
+  iconLink: string = 'https://www.weatherbit.io/static/img/icons/';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -62,29 +64,40 @@ export class WeatherConditionsComponent {
   }
 
   loadWeatherData(city: string) {
-    // this.weatherService.getCurrentWeather(city).subscribe({
-    //   next: (res: CurrentWeather) => {
-    //     this.currentWeather = res;
-    //   },
-    //   error: (err) => console.log(err),
-    // });
+    this.weatherService.getCurrentWeather(city).subscribe({
+      next: (res: CurrentWeather) => {
+        this.currentWeather = res;
+      },
+      error: (err) => console.log(err),
+    });
+    this.weatherService.getDailyWeather(city).subscribe({
+      next: (res: DailyWeather) => {
+        this.dailyWeather = res;
+        if (res.data && res.data.length > 0) {
+          this.dailyWeatherData = res.data[0];
+        }
+      },
+      error: (err) => console.log(err),
+    });
+    this.weatherService.getWeeklyWeather(city).subscribe({
+      next: (res: WeeklyWeather) => {
+        this.weeklyWeather = res;
+      },
+      error: (err) => console.log(err),
+    });
+  }
 
-    // this.weatherService.getDailyWeather(city).subscribe({
-    //   next: (res: DailyWeather) => {
-    //     this.dailyWeather = res;
-    //     if (res.data && res.data.length > 0) {
-    //       this.dailyWeatherData = res.data[0];
-    //     }
-    //   },
-    //   error: (err) => console.log(err),
-    // });
+  weeklyReadMore(dateTime: string) {
+    const data = this.weeklyWeather?.data.find(
+      (weather) => weather.datetime === dateTime
+    );
+    this.weeklyWeatherData = data;
+  }
 
-    // this.weatherService.getWeeklyWeather(city).subscribe({
-    //   next: (res: WeeklyWeather) => {
-    //     this.weeklyWeather = res;
-    //   },
-    //   error: (err) => console.log(err),
-    // });
+  getDayName(dateString: string): string {
+    const date = new Date(dateString);
+    const days = ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'];
+    return days[date.getDay()];
   }
 
   clearInput() {

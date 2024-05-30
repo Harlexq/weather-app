@@ -13,32 +13,29 @@ import { WeeklyWeather } from '../models/WeeklyWeather';
 export class WeatherService {
   weatherBitApiUrl: string = environment.weatherBitApiUrl;
   weatherBitApiKey: string = environment.weatherBitApiKey;
-  weatherBitApiHost: string = 'weatherbit-v1-mashape.p.rapidapi.com';
 
   constructor(
     private http: HttpClient,
     private geocodingService: GeocodingService
   ) {}
 
-  headers: HttpHeaders = new HttpHeaders()
-    .set('X-RapidAPI-Key', this.weatherBitApiKey)
-    .set('X-RapidAPI-Host', this.weatherBitApiHost);
+  private createParams(coords: { lon: number; lat: number }): HttpParams {
+    return new HttpParams()
+      .set('lon', String(coords.lon))
+      .set('lat', String(coords.lat))
+      .set('key', this.weatherBitApiKey)
+      .set('units', 'metric')
+      .set('lang', 'tr');
+  }
 
   getCurrentWeather(city: string): Observable<CurrentWeather> {
     return this.geocodingService.getCoordinates(city).pipe(
       switchMap((coords) => {
-        const params = new HttpParams()
-          .set('lon', String(coords.lon))
-          .set('lat', String(coords.lat))
-          .set('units', 'metric')
-          .set('lang', 'tr');
+        const params = this.createParams(coords);
 
         return this.http.get<CurrentWeatherData>(
           `${this.weatherBitApiUrl}/current`,
-          {
-            params,
-            headers: this.headers,
-          }
+          { params: params }
         );
       }),
       map((res) => res.data[0])
@@ -48,18 +45,11 @@ export class WeatherService {
   getDailyWeather(city: string): Observable<DailyWeather> {
     return this.geocodingService.getCoordinates(city).pipe(
       switchMap((coords) => {
-        const params = new HttpParams()
-          .set('lon', String(coords.lon))
-          .set('lat', String(coords.lat))
-          .set('units', 'metric')
-          .set('lang', 'tr');
+        const params = this.createParams(coords);
 
         return this.http.get<DailyWeather>(
           `${this.weatherBitApiUrl}/forecast/daily`,
-          {
-            params: params,
-            headers: this.headers,
-          }
+          { params: params }
         );
       }),
       map((res) => {
@@ -72,18 +62,11 @@ export class WeatherService {
   getWeeklyWeather(city: string): Observable<WeeklyWeather> {
     return this.geocodingService.getCoordinates(city).pipe(
       switchMap((coords) => {
-        const params = new HttpParams()
-          .set('lon', String(coords.lon))
-          .set('lat', String(coords.lat))
-          .set('units', 'metric')
-          .set('lang', 'tr');
+        const params = this.createParams(coords);
 
         return this.http.get<WeeklyWeather>(
           `${this.weatherBitApiUrl}/forecast/daily`,
-          {
-            params: params,
-            headers: this.headers,
-          }
+          { params: params }
         );
       }),
       map((res) => {
