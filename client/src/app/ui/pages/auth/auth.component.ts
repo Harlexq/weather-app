@@ -22,7 +22,6 @@ export class AuthComponent {
     private renderer: Renderer2,
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
   ) {}
 
   signUpMode() {

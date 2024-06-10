@@ -1,0 +1,57 @@
+<div
+  class="today"
+  *ngIf="dailyWeather && dailyWeatherData"
+>
+  <div class="head">
+    <h2>{{ dailyWeather.city_name }}</h2>
+    <p>{{ getDayName(dailyWeatherData.datetime) }}</p>
+  </div>
+  <div class="content">
+    <div class="content-item">
+      <h2 class="title">Bugünün Hava Durumu Bilgisi</h2>
+      <div class="weat-last-info">
+        <div class="weat-weather">
+          <h3>Sıcaklık:</h3>
+          <p>{{ dailyWeatherData.temp }} °C</p>
+        </div>
+        <div class="weat-weather">
+          <img
+            [src]="iconLink + dailyWeatherData.weather.icon + '.png'"
+            class="weat-icon"
+          />
+          <p>{{ dailyWeatherData.weather.description }}</p>
+        </div>
+      </div>
+      <div class="weat-info">
+        <article class="weat-info-item">
+          <h3>Maximum Sıcaklık</h3>
+          <p>{{ dailyWeatherData.max_temp }} °C</p>
+        </article>
+        <article class="weat-info-item">
+          <h3>Minumum Sıcaklık</h3>
+          <p>{{ dailyWeatherData.min_temp }} °C</p>
+        </article>
+        <article class="weat-info-item">
+          <h3>Nem</h3>
+          <p>{{ dailyWeatherData.rh }} %</p>
+        </article>
+        <article class="weat-info-item">
+          <h3>Rüzgar Hızı</h3>
+          <p>{{ dailyWeatherData.wind_spd }}</p>
+        </article>
+        <article class="weat-info-item">
+          <h3>Rüzgar Yönü</h3>
+          <p>{{ dailyWeatherData.wind_cdir }}</p>
+        </article>
+        <article class="weat-info-item">
+          <h3>Basınç</h3>
+          <p>{{ dailyWeatherData.pres }} hPa</p>
+        </article>
+        <article class="weat-info-item">
+          <h3>Görüş Mesafesi</h3>
+          <p>{{ dailyWeatherData.vis }} km</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</div>

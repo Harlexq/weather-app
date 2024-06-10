@@ -1,6 +1,6 @@
-<header class="header" #header>
+<header class="header" [ngClass]="{ 'scrolled': isScrolled }">
   <div class="container-fluid">
-    <div class="header-inner" #headerInner>
+    <div class="header-inner" [ngClass]="{ 'scrolled-inner': isScrolled }">
       <button class="mobile-menu-toggle" (click)="mobileMenu()">
         <i class="fa-solid fa-bars"></i>
       </button>
@@ -18,13 +18,27 @@
           >{{ item.title }}
         </a>
       </nav>
-      <div class="auth" *ngIf="getToken(); else notToken">
+      <div class="auth" *ngIf="getToken(); else token">
         <a routerLink="/auth" class="auth-item">Giriş Yap</a>
       </div>
-      <ng-template #notToken>
-        <button class="user" (click)="userDropwon()">
-          <img src="https://freesvg.org/img/abstract-user-flat-4.png" alt="" />
-          <i class="fa-solid fa-angle-down"></i>
+      <ng-template #token>
+        <div class="user-content">
+          <button
+            class="user"
+            (click)="userDropwon()"
+            [ngStyle]="
+              dropdown
+                ? { 'background-color': '#4e75ff', color: '#f1f1f1' }
+                : {}
+            "
+          >
+            <img
+              src="https://freesvg.org/img/abstract-user-flat-4.png"
+              alt=""
+            />
+            <p>Serhan Bakır</p>
+            <i class="fa-solid fa-angle-down"></i>
+          </button>
           <div class="user-dropdown" *ngIf="dropdown">
             <div class="dropdown">
               <a routerLink="/" class="dropdown-item">
@@ -37,7 +51,7 @@
               </button>
             </div>
           </div>
-        </button>
+        </div>
       </ng-template>
     </div>
   </div>

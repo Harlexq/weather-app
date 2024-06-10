@@ -8,7 +8,7 @@ import { User } from '../models/User';
   providedIn: 'root',
 })
 export class AuthService {
-  apiUrl: string = '';
+  apiUrl: string = environment.weatherAppApiUrl;
 
   constructor(private http: HttpClient, private router: Router) {}
 

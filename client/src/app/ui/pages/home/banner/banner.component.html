@@ -1,0 +1,60 @@
+<div class="banner">
+  <div class="container-fluid">
+    <div class="banner-inner">
+      <div class="banner-col">
+        <h2>Hava Durumu & Tahmin</h2>
+        <h3>Anlık, Günlük ve Haftalık Hava Tahmini</h3>
+        <p>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi eum
+          dicta iusto facere voluptatibus nostrum iste nam doloremque quam eos?
+        </p>
+        <form
+          class="input-field"
+          [formGroup]="citySearchForm"
+          (ngSubmit)="search()"
+        >
+          <input
+            type="text"
+            placeholder="Şehir adı giriniz..."
+            class="input"
+            [formControl]="Name"
+          />
+          <button
+            class="clear-input"
+            type="button"
+            *ngIf="Name.value"
+            (click)="clearInput()"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+          <button class="search-input" type="submit" [disabled]="!Name.valid">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+      </div>
+      <div class="banner-col">
+        <div class="card" *ngIf="currentWeather && weeklyWeather">
+          <h2>{{ currentWeather.city_name }}</h2>
+          <p>
+            Son gözlem süresi:
+            {{ currentWeather.ob_time.replaceAll("-", "/") }}
+          </p>
+          <h3>{{ currentWeather.temp }}</h3>
+          <div class="weather-list">
+            <div
+              class="weather-item"
+              *ngFor="let weeklyWeatherData of weeklyWeather.data.slice(0, 3)"
+            >
+              <img
+                [src]="iconLink + weeklyWeatherData.weather.icon + '.png'"
+                class="weather-img"
+              />
+              <p>{{ getDayName(weeklyWeatherData.datetime) }}</p>
+              <span>{{ weeklyWeatherData.temp }}°</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

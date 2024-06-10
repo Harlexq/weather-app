@@ -1,0 +1,129 @@
+.today {
+  .head {
+    display: flex;
+    justify-content: space-between;
+    h2 {
+      font-size: 40px;
+      font-weight: 600;
+      color: #fff;
+    }
+    p {
+      font-size: 25px;
+      font-weight: 600;
+      color: #4e75ff;
+    }
+  }
+  .content {
+    .weat-last-info {
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .weat-weather {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        h3 {
+          color: #4e75ff;
+          font-size: 25px;
+        }
+        .weat-icon {
+          width: 50px;
+        }
+        p {
+          font-size: 20px;
+          font-weight: 600;
+          color: #fff;
+        }
+      }
+    }
+    .weat-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 15px;
+      .weat-info-item {
+        background-color: #4e75ff;
+        border-radius: 4px;
+        padding: 15px;
+        border: 1px solid #fff;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: rgba(149, 157, 165, 0.5) 0px 8px 24px;
+        }
+        h3 {
+          font-size: 20px;
+          font-weight: 600;
+        }
+        p {
+          margin: 5px 0;
+        }
+      }
+    }
+    .weat-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(203px, 1fr));
+      gap: 15px;
+      .week-info-item {
+        background-color: #e6e6e6;
+        border-radius: 4px;
+        padding: 15px;
+        border: 1px solid #fff;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: rgba(149, 157, 165, 0.5) 0px 8px 24px;
+        }
+        .week-head {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          height: 40px;
+          h3 {
+            color: #4e75ff;
+          }
+          p {
+            color: #1f1f1f;
+          }
+        }
+        .week-content {
+          margin-top: 5px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          img {
+            width: 50px;
+          }
+          p {
+            font-size: 18px;
+            color: #1f1f1f;
+          }
+        }
+        .week-footer {
+          display: flex;
+          justify-content: flex-end;
+          height: 40px;
+          .footer-read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            color: #1f1f1f;
+            font-weight: 600;
+            font-size: 18px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            &:hover {
+              transition: all 0.4s ease-in-out;
+              color: #4e75ff;
+            }
+          }
+        }
+      }
+    }
+  }
+}

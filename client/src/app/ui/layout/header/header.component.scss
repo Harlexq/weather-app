@@ -5,12 +5,23 @@
   width: 100%;
   z-index: 998;
   transition: 0.4s;
+  &.scrolled {
+    background-color: #06131f;
+    border-bottom: 1px solid #ccc;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    * {
+      color: #f1f1f1;
+    }
+  }
   .header-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 110px;
     transition: 0.4s;
+    &.scrolled-inner {
+      height: 80px;
+    }
     .mobile-menu-toggle {
       width: 50px;
       height: 50px;
@@ -100,20 +111,35 @@
         }
       }
     }
-    .user {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-      background-color: transparent;
-      border: none;
+    .user-content {
       position: relative;
-      img {
-        width: 50px;
-      }
-      i {
-        color: #fff;
-        font-size: 20px;
+      .user {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+        border-radius: 4px;
+        padding: 8px 10px;
+        transition: all 0.3s ease-in-out;
+        color: #1f1f1f;
+        font-size: 14px;
+        font-weight: 600;
+        &:hover {
+          background-color: #4e75ff;
+          color: #f1f1f1;
+        }
+        &:active {
+          background-color: #0037ff;
+          color: #f1f1f1;
+        }
+        img {
+          width: 32px;
+        }
+        i {
+          font-size: 16px;
+        }
       }
       .user-dropdown {
         position: absolute;
@@ -121,14 +147,14 @@
         left: 50%;
         transform: translateX(-50%);
         .dropdown {
-          background-color: #fff;
           border-radius: 4px;
           width: 200px;
           overflow: hidden;
           box-shadow: rgba(255, 255, 255, 0.2) 0px 7px 29px 0px;
+          border: 1px solid #4e75ff;
           .dropdown-item {
-            color: #1f1f1f;
-            background-color: #f1f1f1;
+            color: #f1f1f1;
+            background-color: #1f1f1f;
             border: none;
             cursor: pointer;
             padding: 10px;
@@ -141,7 +167,6 @@
             align-items: center;
             justify-content: space-between;
             i {
-              color: #1f1f1f;
               transition: all 0.3s ease-in-out;
             }
             &:hover i {

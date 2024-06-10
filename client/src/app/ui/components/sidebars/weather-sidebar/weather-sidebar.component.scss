@@ -1,0 +1,68 @@
+.aside-content {
+  margin: 20px 0;
+  .instant-head {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    h3 {
+      font-size: 40px;
+      font-weight: 600;
+      color: #1f1f1f;
+    }
+    .head-item {
+      p {
+        font-size: 25px;
+        font-weight: 600;
+        color: #4e75ff;
+      }
+    }
+  }
+  .weat-last-info {
+    display: flex;
+    margin: 10px 0;
+    gap: 10px;
+    flex-direction: column;
+    .weat-weather {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      h3 {
+        color: #4e75ff;
+        font-size: 25px;
+      }
+      .weat-icon {
+        width: 50px;
+      }
+      p {
+        font-size: 20px;
+        font-weight: 600;
+        color: #1f1f1f;
+      }
+    }
+  }
+  .instant-info {
+    .instant-foot {
+      .instant-items {
+        margin: 25px 0;
+        .instant-item {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin: 10px 0;
+          img {
+            width: 40px;
+          }
+          h4 {
+            font-size: 20px;
+            font-weight: 600;
+          }
+          p {
+            font-size: 20px;
+            font-weight: 600;
+            color: #4e75ff;
+          }
+        }
+      }
+    }
+  }
+}

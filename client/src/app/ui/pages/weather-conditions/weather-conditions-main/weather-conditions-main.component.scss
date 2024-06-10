@@ -1,0 +1,46 @@
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  .tab-btn {
+    background-color: transparent;
+    font-size: 20px;
+    padding: 0 15px 15px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    color: #1f1f1f;
+    font-weight: 600;
+    &:disabled {
+      color: #797979;
+      cursor: not-allowed;
+    }
+    &:disabled.active {
+      color: #797979;
+    }
+    &:disabled::before {
+      background-color: #797979;
+    }
+    &:first-child {
+      display: none;
+    }
+    &.active {
+      color: #4e75ff;
+      &::before {
+        width: 100%;
+      }
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: 0px;
+      left: 0;
+      background-color: #4e75ff;
+      width: 0;
+      height: 3px;
+    }
+  }
+}
+.tab-main {
+  margin: 40px 0;
+}

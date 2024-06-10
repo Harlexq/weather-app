@@ -1,0 +1,46 @@
+<div class="today" *ngIf="currentWeather">
+  <div class="head">
+    <h2>Gaziantep</h2>
+    <p>2024/58/54</p>
+  </div>
+  <div class="content">
+    <div class="content-item">
+      <h2 class="title">Anlık Hava Durumu Bilgisi</h2>
+      <div class="weat-last-info">
+        <div class="weat-weather">
+          <h3>Sıcaklık:</h3>
+          <p>{{ currentWeather.temp }} °C</p>
+        </div>
+        <div class="weat-weather">
+          <img
+            [src]="iconLink + currentWeather.weather.icon + '.png'"
+            class="weat-icon"
+          />
+          <p>{{ currentWeather.weather.description }}</p>
+        </div>
+      </div>
+      <div class="weat-info">
+        <article class="weat-info-item">
+          <h3>Nem</h3>
+          <p>{{ currentWeather.rh }} %</p>
+        </article>
+        <article class="weat-info-item">
+          <h3>Rüzgar Hızı</h3>
+          <p>{{ currentWeather.wind_spd }}</p>
+        </article>
+        <article class="weat-info-item">
+          <h3>Rüzgar Yönü</h3>
+          <p>{{ currentWeather.wind_cdir }}</p>
+        </article>
+        <article class="weat-info-item">
+          <h3>Basınç</h3>
+          <p>{{ currentWeather.pres }} hPa</p>
+        </article>
+        <article class="weat-info-item">
+          <h3>Görüş Mesafesi</h3>
+          <p>{{ currentWeather.vis }} km</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</div>

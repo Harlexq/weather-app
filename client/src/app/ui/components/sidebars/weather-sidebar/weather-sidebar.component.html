@@ -1,0 +1,50 @@
+<weather-sidebar-form (citySelected)="onCitySelected($event)" />
+<div class="aside-content" *ngIf="cityQueryParam && currentWeather">
+  <h2 class="title">Anlık Hava Durumu Bilgisi</h2>
+  <div class="instant-head">
+    <h3>{{ currentWeather.city_name }}</h3>
+    <div class="head-item">
+      <p>Anlık</p>
+    </div>
+  </div>
+  <div class="weat-last-info">
+    <div class="weat-weather">
+      <h3>Sıcaklık:</h3>
+      <p>{{ currentWeather.temp }} °C</p>
+    </div>
+    <div class="weat-weather">
+      <img
+        [src]="iconLink + currentWeather.weather.icon + '.png'"
+        class="weat-icon"
+      />
+      <p>{{ currentWeather.weather.description }}</p>
+    </div>
+  </div>
+  <div class="instant-info">
+    <div class="instant-foot">
+      <h2 class="title">Hava Durumu Bilgisi</h2>
+      <div class="instant-items">
+        <article class="instant-item">
+          <h4>Nem:</h4>
+          <p>{{ currentWeather.rh }}%</p>
+        </article>
+        <article class="instant-item">
+          <h4>Rüzgar Hızı:</h4>
+          <p>{{ currentWeather.wind_spd }}</p>
+        </article>
+        <article class="instant-item">
+          <h4>Rüzgar Yönü:</h4>
+          <p>{{ currentWeather.wind_cdir }}</p>
+        </article>
+        <article class="instant-item">
+          <h4>Basınç:</h4>
+          <p>{{ currentWeather.pres }} hPa</p>
+        </article>
+        <article class="instant-item">
+          <h4>Görüş Mesafesi:</h4>
+          <p>{{ currentWeather.vis }} km</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</div>

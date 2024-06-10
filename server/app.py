@@ -12,7 +12,6 @@ from config import create_app, init_api, init_mysql
 from views.functions import getDate, generate_salt, generate_salted_token, check_username, allowed_file
 
 import datetime
-import hashlib
 import uuid
 import os
 
@@ -29,7 +28,7 @@ CORS(app)
 
 load_dotenv()
 
-SITE_URL = "http://127.0.0.1:90"
+SITE_URL = "http://127.0.0.1:3500"
 
 class Index(Resource):
     def get(self):
@@ -242,5 +241,5 @@ api.add_resource(AddProfilePhoto, "/user/edit/profilePhoto/<id>")
 
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 90))
+    port = int(os.environ.get("PORT", 3500))
     app.run(host="0.0.0.0", port=port, debug=True)

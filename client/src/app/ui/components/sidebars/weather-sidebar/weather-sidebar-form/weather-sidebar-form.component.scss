@@ -1,0 +1,49 @@
+.input-field {
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  .input {
+    width: 100%;
+    padding: 8px 38px 8px 10px;
+    outline: none;
+    border: none;
+    font-size: 14px;
+    color: #1f1f1f;
+    &::placeholder {
+      color: #1f1f1f;
+      font-size: 14px;
+    }
+  }
+  .clear-input {
+    background-color: #1f1f1f;
+    font-size: 14px;
+    border-radius: 50%;
+    color: #f1f1f1;
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    top: 5px;
+    right: 35px;
+    cursor: pointer;
+  }
+  .search-input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 32px;
+    height: 100%;
+    border: none;
+    background-color: #f1f1f1;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+    &:hover {
+      background-color: #4e75ff;
+      color: #f1f1f1;
+    }
+    &:disabled {
+      background-color: #9c9c9c;
+      color: #f1f1f1;
+      cursor: not-allowed;
+    }
+  }
+}

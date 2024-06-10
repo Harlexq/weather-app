@@ -12,12 +12,8 @@
               [formControl]="signInEmail"
             />
           </div>
-          <ng-container
-            *ngIf="
-              signInForm.get('email')?.invalid && signInForm.get('email')?.dirty
-            "
-          >
-            <p *ngIf="signInForm.get('email')?.errors?.['required']">
+          <ng-container *ngIf="signInEmail.invalid && signInEmail.dirty">
+            <p *ngIf="signInEmail.errors?.['required']">
               E-Mail Alanı Zorunludur
             </p>
           </ng-container>
@@ -31,13 +27,8 @@
               [formControl]="signInPassword"
             />
           </div>
-          <ng-container
-            *ngIf="
-              signInForm.get('password')?.invalid &&
-              signInForm.get('password')?.dirty
-            "
-          >
-            <p *ngIf="signInForm.get('password')?.errors?.['required']">
+          <ng-container *ngIf="signInPassword.invalid && signInPassword.dirty">
+            <p *ngIf="signInPassword.errors?.['required']">
               Şifre Alanı Zorunludur
             </p>
           </ng-container>
@@ -55,12 +46,8 @@
               [formControl]="signUpName"
             />
           </div>
-          <ng-container
-            *ngIf="
-              signUpForm.get('name')?.invalid && signUpForm.get('name')?.dirty
-            "
-          >
-            <p *ngIf="signUpForm.get('name')?.errors?.['required']">
+          <ng-container *ngIf="signUpName.invalid && signUpName.dirty">
+            <p *ngIf="signUpName.errors?.['required']">
               İsim Soyisim Alanı Zorunludur
             </p>
           </ng-container>
@@ -74,15 +61,11 @@
               [formControl]="signUpEmail"
             />
           </div>
-          <ng-container
-            *ngIf="
-              signUpForm.get('email')?.invalid && signUpForm.get('email')?.dirty
-            "
-          >
-            <p *ngIf="signUpForm.get('email')?.errors?.['required']">
+          <ng-container *ngIf="signUpEmail.invalid && signUpEmail.dirty">
+            <p *ngIf="signUpEmail.errors?.['required']">
               E-Mail Alanı Zorunludur
             </p>
-            <p *ngIf="signUpForm.get('email')?.errors?.['email']">
+            <p *ngIf="signUpEmail.errors?.['email']">
               E-Mail Adresini Doğru Formatda Yazınız
             </p>
           </ng-container>
@@ -96,19 +79,14 @@
               [formControl]="signUpPassword"
             />
           </div>
-          <ng-container
-            *ngIf="
-              signUpForm.get('password')?.invalid &&
-              signUpForm.get('password')?.dirty
-            "
-          >
-            <p *ngIf="signUpForm.get('password')?.errors?.['required']">
+          <ng-container *ngIf="signUpPassword.invalid && signUpPassword.dirty">
+            <p *ngIf="signUpPassword.errors?.['required']">
               Şifre Alanı Zorunludur
             </p>
-            <p *ngIf="signUpForm.get('password')?.errors?.['minlength']">
+            <p *ngIf="signUpPassword.errors?.['minlength']">
               Şifre En Az 6 Karakter Olmalıdır
             </p>
-            <p *ngIf="signUpForm.get('password')?.errors?.['maxlength']">
+            <p *ngIf="signUpPassword.errors?.['maxlength']">
               Şifre En Fazla 12 Karakter Olmalıdır
             </p>
           </ng-container>
