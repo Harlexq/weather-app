@@ -1,0 +1,36 @@
+.blog-img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.blog-info {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  p {
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .date,
+  .author {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    i {
+      color: rgb(79, 117, 255);
+    }
+  }
+}
+.blog-city {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  i {
+    color: rgb(79, 117, 255);
+  }
+  p {
+    font-size: 15px;
+    font-weight: 600;
+  }
+}

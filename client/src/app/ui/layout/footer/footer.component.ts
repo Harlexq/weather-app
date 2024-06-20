@@ -15,16 +15,26 @@ export class FooterComponent {
     },
     {
       id: 2,
-      title: 'Hava Durumları',
-      path: '/weather-conditions',
+      title: 'Hava Tahminleri',
+      path: '/weather-forecasts',
     },
     {
-      id: 3,
+      id: 4,
+      title: 'Harita',
+      path: '/map',
+    },
+    {
+      id: 6,
       title: 'Hakkımızda',
       path: '/about',
     },
     {
-      id: 4,
+      id: 7,
+      title: 'Bloglar',
+      path: '/blogs',
+    },
+    {
+      id: 8,
       title: 'Geri Bildirim',
       path: '/feedback',
     },

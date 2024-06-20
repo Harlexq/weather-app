@@ -1,7 +1,15 @@
 import { Component, ElementRef, HostListener } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { Navbar } from 'src/app/models/Navbar';
+import { User } from 'src/app/models/User';
+import { AuthService } from 'src/app/services/auth.service';
+import { HttpClientService } from 'src/app/services/http-client.service';
 
 @Component({
   selector: 'ui-header',
@@ -13,16 +21,27 @@ export class HeaderComponent {
   menu: boolean = false;
   searchForm!: FormGroup;
   isScrolled = false;
+  user: User | null = null;
 
   ngOnInit(): void {
     this.searchFormCreate();
+    this.getUsers();
   }
 
   constructor(
     private elementRef: ElementRef,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private authService: AuthService,
+    private http: HttpClientService
   ) {}
+
+  getUsers() {
+    const userId = localStorage.getItem('userId');
+    this.http.getById<User>('user', Number(userId), (res) => {
+      this.user = res;
+    });
+  }
 
   navItems: Navbar[] = [
     {
@@ -32,8 +51,8 @@ export class HeaderComponent {
     },
     {
       id: 2,
-      title: 'Hava Durumları',
-      path: '/weather-conditions',
+      title: 'Hava Tahminleri',
+      path: '/weather-forecasts',
     },
     {
       id: 4,
@@ -41,21 +60,25 @@ export class HeaderComponent {
       path: '/map',
     },
     {
-      id: 3,
+      id: 6,
       title: 'Hakkımızda',
       path: '/about',
     },
     {
-      id: 3,
+      id: 7,
       title: 'Bloglar',
       path: '/blogs',
     },
     {
-      id: 5,
+      id: 8,
       title: 'Geri Bildirim',
       path: '/feedback',
     },
   ];
+
+  logout() {
+    this.authService.logout("login");
+  }
 
   getToken(): boolean {
     return localStorage.getItem('token') ? false : true;
@@ -68,12 +91,18 @@ export class HeaderComponent {
   }
 
   search() {
-    this.router.navigateByUrl('weather-conditions');
+    this.router.navigate(['/weather-forecasts'], {
+      queryParams: { city: this.Name.value },
+    });
     this.menu = false;
   }
 
   clearInput() {
-    this.searchForm.get('name')?.reset();
+    this.Name.reset();
+  }
+
+  get Name(): FormControl {
+    return this.searchForm.get('name') as FormControl;
   }
 
   mobileMenu() {

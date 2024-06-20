@@ -46,7 +46,7 @@ export class WeatherSidebarFormComponent {
 
   search() {
     if (this.citySearchForm.valid) {
-      this.citySelected.emit(this.citySearchForm.value.name);
+      this.citySelected.emit(this.Name.value);
     }
   }
 

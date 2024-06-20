@@ -1,0 +1,65 @@
+<div class="container">
+  <form class="profile" [formGroup]="profileForm" (ngSubmit)="profileSubmit()">
+    <div class="profile-info">
+      <div class="banner"></div>
+      <div class="user-info" *ngIf="user">
+        <label for="profileImg" class="profile-img-label">
+          <img [src]="user.profileImage" [alt]="user.name" />
+          <div class="profile-img-icon">
+            <i class="fa-solid fa-pen"></i>
+          </div>
+        </label>
+        <input
+          type="file"
+          accept=".jpg, .jpeg, .png"
+          (change)="onFileSelected($event)"
+          id="profileImg"
+          class="profile-img-input"
+        />
+        <h3>{{ user.name }}</h3>
+      </div>
+    </div>
+    <div class="profile-form">
+      <div class="form-field">
+        <label for="name">Kullanıcı Adı</label>
+        <input
+          pInputText
+          id="name"
+          type="text"
+          placeholder="Kullanıcı Adı"
+          [formControl]="Name"
+        />
+      </div>
+      <ng-container *ngIf="Name.invalid && Name.dirty">
+        <p *ngIf="Name.errors?.['required']">Kullanıcı Adı Zorunludur</p>
+      </ng-container>
+      <div class="form-field">
+        <label for="email">E-Mail Adresi</label>
+        <input
+          pInputText
+          id="email"
+          type="email"
+          placeholder="E-Mail Adresi"
+          [formControl]="Email"
+        />
+      </div>
+      <ng-container *ngIf="Email.invalid && Email.dirty">
+        <p *ngIf="Email.errors?.['required']">E-Mail Adresi Zorunludur</p>
+        <p *ngIf="Email.errors?.['email']">
+          E-Mail Adresini Doğru Formatda Yazınız
+        </p>
+      </ng-container>
+      <div class="form-submit">
+        <p-button
+          label="Profili Güncelle"
+          icon="fa-solid fa-save"
+          iconPos="right"
+          type="submit"
+          [disabled]="!profileForm.dirty || !profileForm.valid"
+        />
+      </div>
+    </div>
+  </form>
+</div>
+<p-toast />
+<p-confirmDialog [style]="{ width: '500px' }" />

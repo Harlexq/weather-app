@@ -1,5 +1,10 @@
 <weather-sidebar-form (citySelected)="onCitySelected($event)" />
-<div class="aside-content" *ngIf="cityQueryParam && currentWeather">
+
+<ng-container *ngIf="loading">
+  <preloader />
+</ng-container>
+
+<div class="aside-content" *ngIf="!loading && cityQueryParam && currentWeather">
   <h2 class="title">Anlık Hava Durumu Bilgisi</h2>
   <div class="instant-head">
     <h3>{{ currentWeather.city_name }}</h3>
@@ -30,7 +35,7 @@
         </article>
         <article class="instant-item">
           <h4>Rüzgar Hızı:</h4>
-          <p>{{ currentWeather.wind_spd }}</p>
+          <p>{{ currentWeather.wind_spd }} m/s</p>
         </article>
         <article class="instant-item">
           <h4>Rüzgar Yönü:</h4>

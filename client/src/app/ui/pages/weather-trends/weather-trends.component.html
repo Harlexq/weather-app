@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="weather-trends">
+    <weather-trends-form />
+    <div
+      *ngIf="weeklyWeatherData; else noWeeklyWeatherData"
+      class="weather-trends-main"
+    >
+      <p-chart type="line" [data]="weeklyWeatherData"></p-chart>
+    </div>
+    <ng-template #noWeeklyWeatherData>
+      <div class="weather-trends-main">
+        <div class="empty-city">
+          <div class="empty-city-head">
+            <div class="empty-city-info">
+              <h2>Hoşgeldiniz</h2>
+              <p>
+                Hava durumu bilgisini öğrenmek için arama çubuğunu kullanın.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

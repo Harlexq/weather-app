@@ -1,0 +1,45 @@
+.about {
+  background-color: #eeeeff;
+  padding: 70px 0;
+  color: #1f1f1f;
+  &:nth-child(2) {
+    background-color: #fff;
+  }
+  .about-inner {
+    display: flex;
+    @media only screen and (max-width: 1024px) {
+      flex-direction: column;
+    }
+    gap: 30px;
+    .about-content {
+      flex: 1 0 calc(40% - 30px);
+      h2 {
+        font-size: 35px;
+      }
+      .about-desc {
+        font-size: 17px;
+        margin: 15px 0;
+      }
+    }
+    .about-img {
+      text-align: left;
+      &:nth-child(2) {
+        text-align: right;
+      }
+      @media only screen and (max-width: 768px) {
+        text-align: center;
+      }
+      flex: 1 0 calc(30% - 30px);
+      img {
+        width: 450px;
+        height: 450px;
+        max-width: 100%;
+        object-fit: cover;
+        @media only screen and (max-width: 768px) {
+          width: 100%;
+          height: auto;
+        }
+      }
+    }
+  }
+}

@@ -6,6 +6,7 @@ import { GeocodingService } from './geocoding.service';
 import { CurrentWeather, CurrentWeatherData } from '../models/CurrentWeather';
 import { DailyWeather } from '../models/DailyWeather';
 import { WeeklyWeather } from '../models/WeeklyWeather';
+import { WeatherAlert } from '../models/WeatherAlert';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,7 @@ export class WeatherService {
     private geocodingService: GeocodingService
   ) {}
 
-  private createParams(coords: { lon: number; lat: number }): HttpParams {
+  createParams(coords: { lon: number; lat: number }): HttpParams {
     return new HttpParams()
       .set('lon', String(coords.lon))
       .set('lat', String(coords.lat))
@@ -74,5 +75,18 @@ export class WeatherService {
         return res;
       })
     );
+  }
+
+  getSevereWeatherAlerts(coords: {
+    lon: number;
+    lat: number;
+  }): Observable<WeatherAlert[]> {
+    const params = this.createParams(coords);
+
+    return this.http
+      .get<{ alerts: WeatherAlert[] }>(`${this.weatherBitApiUrl}/alerts`, {
+        params: params,
+      })
+      .pipe(map((res) => res.alerts));
   }
 }

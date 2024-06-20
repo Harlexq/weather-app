@@ -5,9 +5,9 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { User } from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
-
+import { HttpClientService } from 'src/app/services/http-client.service';
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
@@ -17,11 +17,15 @@ export class AuthComponent {
   signInForm!: FormGroup;
   signUpForm!: FormGroup;
   @ViewChild('auth') authElement: ElementRef | null = null;
+  users: User[] = [];
+  errorMessage: string = '';
+  signInErrorMessage: string = '';
 
   constructor(
     private renderer: Renderer2,
     private formBuilder: FormBuilder,
     private authService: AuthService,
+    private http: HttpClientService
   ) {}
 
   signUpMode() {
@@ -37,6 +41,7 @@ export class AuthComponent {
   }
 
   ngOnInit(): void {
+    this.getUsers();
     this.signInFormCreate();
     this.signUpFormCreate();
   }
@@ -63,12 +68,34 @@ export class AuthComponent {
     });
   }
 
+  getUsers() {
+    this.http.get<User[]>('users', (res) => {
+      this.users = res;
+    });
+  }
+
   signIn() {
-    this.authService.login(this.signUpForm.value, (res) => {});
+    this.users.find((user) => {
+      if (user.email === this.signInEmail.value) {
+        this.authService.login('login', this.signInForm.value, (res) => {});
+      } else {
+        this.signInErrorMessage = 'E-Mail Adresi veya Şifre Yanlış';
+      }
+    });
   }
 
   signUp() {
-    this.authService.signup(this.signUpForm.value, (res) => {});
+    const userExists = this.users.find(
+      (user) => user.email === this.signUpEmail.value
+    );
+
+    if (userExists) {
+      this.errorMessage = 'Bu E-Mail Adresi Zaten Kayıtlı';
+    } else {
+      this.authService.signup('signup', this.signUpForm.value, (res) => {
+        this.errorMessage = '';
+      });
+    }
   }
 
   get signInEmail(): FormControl {

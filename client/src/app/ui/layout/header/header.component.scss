@@ -12,6 +12,9 @@
     * {
       color: #f1f1f1;
     }
+    .mobile-menu-toggle {
+      color: #f1f1f1 !important;
+    }
   }
   .header-inner {
     display: flex;
@@ -31,7 +34,7 @@
       font-size: 25px;
       background-color: transparent;
       border: none;
-      color: #fff;
+      color: #1f1f1f;
       cursor: pointer;
       display: none;
       @media only screen and (max-width: 1024px) {
@@ -48,16 +51,30 @@
       h1 {
         font-size: 25px;
       }
+      @media only screen and (max-width: 768px) {
+        gap: 5px;
+        img {
+          width: 60px;
+        }
+        h1 {
+          font-size: 15px;
+        }
+      }
+      @media only screen and (max-width: 500px) {
+        h1 {
+          display: none;
+        }
+      }
     }
     .nav {
       display: flex;
       align-items: center;
-      gap: 15px;
+      gap: 5px;
       @media only screen and (max-width: 1024px) {
         display: none;
       }
       .nav-item {
-        font-size: 18px;
+        font-size: 16px;
         font-weight: 600;
         padding: 10px;
         position: relative;
@@ -105,6 +122,7 @@
         transition: all 0.3s ease-in-out;
         font-size: 16px;
         font-weight: 600;
+        color: #f1f1f1;
         &:hover {
           background-color: #315bf7;
           box-shadow: 0px 5px 20px rgba(49, 91, 247, 0.4);
@@ -136,6 +154,9 @@
         }
         img {
           width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          object-fit: cover;
         }
         i {
           font-size: 16px;
@@ -196,9 +217,18 @@
         justify-content: space-between;
         padding: 0 15px;
         border-bottom: 1px solid #cfcfcf;
-        height: 50px;
-        h2 {
-          font-size: 18px;
+        height: 60px;
+        .logo {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          img {
+            width: 55px;
+          }
+          h2 {
+            font-size: 14px;
+            color: #f1f1f1;
+          }
         }
         .mobile-menu-close {
           width: 35px;

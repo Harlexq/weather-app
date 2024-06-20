@@ -1,0 +1,63 @@
+<div class="blog-content">
+  <div class="container">
+    <h2 class="city-title">Hava Tahmini Blogları</h2>
+    <p class="city-desc">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit Bibendum cursus
+      quis.
+    </p>
+    <div class="blogs">
+      <div class="main-blogs">
+        <a
+          *ngFor="let blog of blogs.slice(0, 1)"
+          [routerLink]="'/blog-detail/' + blog.id"
+          class="main-blog"
+        >
+          <p class="city">{{ blog.city }}</p>
+          <div class="blog-img">
+            <img [src]="blog.image" [alt]="blog.title" />
+          </div>
+          <div class="blog-info">
+            <h3 class="blog-title">{{ blog.title }}</h3>
+            <p
+              class="blog-desc"
+              [innerHTML]="blog.description.slice(0, 80) + '...'"
+            ></p>
+            <div class="blog-info-text">
+              <p class="author">{{ blog.author }}</p>
+              <p class="date">
+                <i class="fa-solid fa-calendar-days"></i>
+                {{ formatPublicationDate(blog.publicationDate) }}
+              </p>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="side-blogs">
+        <a
+          *ngFor="let blog of blogs.slice(1, 4)"
+          [routerLink]="'/blog-detail/' + blog.id"
+          class="blog-item"
+        >
+          <div class="blog-img">
+            <img [src]="blog.image" [alt]="blog.title" />
+          </div>
+          <div class="blog-info">
+            <p class="city">{{ blog.city }}</p>
+            <h3 class="blog-title">{{ blog.title }}</h3>
+            <p
+              class="blog-desc"
+              [innerHTML]="blog.description.slice(0, 50) + '...'"
+            ></p>
+            <div class="blog-info-text">
+              <p class="author">{{ blog.author }}</p>
+              <p class="date">
+                <i class="fa-solid fa-calendar-days"></i>
+                {{ formatPublicationDate(blog.publicationDate) }}
+              </p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

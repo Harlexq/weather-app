@@ -1,15 +1,22 @@
-<div *ngIf="inputId; else notInputId" [formGroup]="form">
-  <label [for]="inputId">{{ labelName }}</label>
+<div *ngIf="!icon; else iconAvailable" [formGroup]="form">
   <input
     [type]="type"
     [placeholder]="placeholder"
     class="input"
-    [id]="inputId"
     [formControl]="fb"
   />
 </div>
-<ng-template #notInputId>
-  <div [formGroup]="form">
-    <input [type]="type" [placeholder]="placeholder" class="input" />
+<ng-template #iconAvailable>
+  <div class="input-field">
+    <input
+      [type]="type"
+      [placeholder]="placeholder"
+      class="input"
+      [formControl]="fb"
+      [id]="iconId"
+    />
+    <label type="button" class="input-icon" [for]="iconId">
+      <i [class]="icon"></i>
+    </label>
   </div>
 </ng-template>

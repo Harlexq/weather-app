@@ -1,0 +1,52 @@
+<div class="map-container">
+  <div class="map" id="map"></div>
+  <div
+    class="sidebar"
+    *ngIf="currentWeather"
+    [ngClass]="{ 'sidebar-scrolled': isScrolled }"
+  >
+    <div class="head">
+      <p>
+        <strong>{{ currentWeather.city_name }}</strong> Anlık Hava Durum Bilgisi
+      </p>
+      <button (click)="sidebarClose()" class="close-btn">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="content">
+      <article class="content-item">
+        Hava Sıcaklığı: <strong>{{ currentWeather.temp }}°</strong>
+      </article>
+      <article class="content-item">
+        Nem: <strong>{{ currentWeather.rh }}%</strong>
+      </article>
+      <article class="content-item">
+        Rüzgar Hızı: <strong>{{ currentWeather.wind_spd }} m/s</strong>
+      </article>
+      <article class="content-item">
+        Rüzgar Yönü: <strong>{{ currentWeather.wind_cdir }}</strong>
+      </article>
+      <article class="content-item">
+        Basınç: <strong>{{ currentWeather.pres }} hPa</strong>
+      </article>
+      <article class="content-item">
+        Görüş Mesafesi: <strong>{{ currentWeather.vis }} km</strong>
+      </article>
+    </div>
+  </div>
+  <div
+    class="sidebar"
+    *ngIf="!currentWeather"
+    [ngClass]="{ 'sidebar-scrolled': isScrolled }"
+  >
+    <div class="head">
+      <p>Anlık Hava Durum Bilgisi</p>
+    </div>
+    <div class="content">
+      <p class="content-desc">
+        Anlık hava durum bilgisini Görüntülemek için haritadan bir lokasyonu
+        seçiniz.
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="container">
+  <div *ngIf="blog">
+    <h2 class="blog-title">{{ blog.title }}</h2>
+    <img class="blog-img" [src]="blog.image" [alt]="blog.title" />
+    <div class="blog-info">
+      <div class="author">
+        <i class="fa-solid fa-user"></i>
+        <p>{{ blog.author }}</p>
+      </div>
+      <div class="date">
+        <i class="fa-solid fa-calendar-days"></i>
+        <p>{{ formatPublicationDate(blog.publicationDate) }}</p>
+      </div>
+    </div>
+    <p class="blog-desc" [innerHTML]="blog.description"></p>
+    <p class="blog-city">{{ blog.city }}</p>
+  </div>
+</div>

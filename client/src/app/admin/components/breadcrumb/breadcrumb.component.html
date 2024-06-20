@@ -1,0 +1,12 @@
+<div class="breadcrumb">
+  <i class="fa-solid fa-house"></i>
+  <article>
+    <a routerLink="/admin" style="color: #4e75ff; text-decoration: underline">
+      Anasayfa
+    </a>
+    <span> /</span>
+  </article>
+  <article *ngFor="let item of breadcrumbItems; let last = last">
+    {{ item }}<span *ngIf="!last"> /</span>
+  </article>
+</div>

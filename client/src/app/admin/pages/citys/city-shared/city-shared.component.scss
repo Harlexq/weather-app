@@ -1,0 +1,18 @@
+.form {
+  .p-inputgroup {
+    margin-bottom: 10px;
+  }
+
+  ::ng-deep {
+    p-fileUpload {
+      .p-fileupload {
+        margin-top: 10px !important;
+      }
+    }
+  }
+  .form-submit {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+  }
+}

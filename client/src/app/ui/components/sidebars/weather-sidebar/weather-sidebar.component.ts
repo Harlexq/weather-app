@@ -15,6 +15,7 @@ export class WeatherSidebarComponent {
   currentWeather: CurrentWeather | null = null;
   iconLink: string = 'https://www.weatherbit.io/static/img/icons/';
   cityQueryParam: string | null = null;
+  loading: boolean = false;
 
   constructor(
     private weatherService: WeatherService,
@@ -46,11 +47,16 @@ export class WeatherSidebarComponent {
   }
 
   loadWeatherData(city: string) {
+    this.loading = true;
     this.weatherService.getCurrentWeather(city).subscribe({
       next: (res: CurrentWeather) => {
         this.currentWeather = res;
+        this.loading = false;
       },
-      error: (err) => console.log(err),
+      error: (err) => {
+        console.log(err);
+        this.loading = false;
+      },
     });
   }
 }

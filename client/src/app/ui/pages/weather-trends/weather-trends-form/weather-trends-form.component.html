@@ -1,0 +1,21 @@
+<h2>Haftalık Hava Tahmin Grafiği</h2>
+<form class="input-field" [formGroup]="citySearchForm" (ngSubmit)="search()">
+  <input
+    type="text"
+    placeholder="Şehir adı giriniz..."
+    class="input"
+    [formControl]="Name"
+    (ngModelChange)="onNameChange($event)"
+  />
+  <button
+    class="clear-input"
+    type="button"
+    *ngIf="Name.value"
+    (click)="clearInput()"
+  >
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+  <button class="search-input" type="submit" [disabled]="!Name.valid">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+</form>

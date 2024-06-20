@@ -1,0 +1,13 @@
+.main {
+  display: grid;
+  align-items: center;
+  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  .main-item {
+    .main-title {
+      font-size: 20px;
+      color: #4e75ff;
+      margin-bottom: 10px;
+    }
+  }
+}

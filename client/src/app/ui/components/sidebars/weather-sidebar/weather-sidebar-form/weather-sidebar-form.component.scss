@@ -25,6 +25,9 @@
     top: 5px;
     right: 35px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .search-input {
     position: absolute;
@@ -33,11 +36,12 @@
     width: 32px;
     height: 100%;
     border: none;
-    background-color: #f1f1f1;
+    background-color: #5c5470;
+    color: #f1f1f1;
     cursor: pointer;
     transition: all 0.4s ease-in-out;
     &:hover {
-      background-color: #4e75ff;
+      background-color: #352f44;
       color: #f1f1f1;
     }
     &:disabled {

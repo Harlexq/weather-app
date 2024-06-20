@@ -9,8 +9,7 @@ import { environment } from 'src/environments/environment';
 export class GeocodingService {
   openWeatherApiUrl: string = environment.openWeatherApiUrl;
   openWeatherApiKey: string = environment.openWeatherApiKey;
-  googleGeocodingApiUrl: string = environment.googleGeocodingApiUrl;
-  googleApiKey: string = environment.googleGeocodingApiKey;
+  nominatimApiUrl: string = 'https://nominatim.openstreetmap.org/reverse';
 
   constructor(private http: HttpClient) {}
 
@@ -36,23 +35,24 @@ export class GeocodingService {
 
   getCityName(lat: number, lon: number): Observable<string> {
     const params = new HttpParams()
-      .set('latlng', `${lat},${lon}`)
-      .set('key', this.googleApiKey);
+      .set('lat', lat.toString())
+      .set('lon', lon.toString())
+      .set('format', 'json')
+      .set('addressdetails', '1');
 
-    return this.http
-      .get<any>(`${this.googleGeocodingApiUrl}/geocode/json`, { params })
-      .pipe(
-        map((response) => {
-          const results = response.results;
-          for (let result of results) {
-            for (let component of result.address_components) {
-              if (component.types.includes('administrative_area_level_1')) {
-                return component.long_name;
-              }
-            }
-          }
+    return this.http.get<any>(this.nominatimApiUrl, { params }).pipe(
+      map((res) => {
+        const address = res.address;
+        if (address && address.city) {
+          return address.city;
+        } else if (address && address.town) {
+          return address.town;
+        } else if (address && address.village) {
+          return address.village;
+        } else {
           throw new Error('Şehir Bulunamadı.');
-        })
-      );
+        }
+      })
+    );
   }
 }

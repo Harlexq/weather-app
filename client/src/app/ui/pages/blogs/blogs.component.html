@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="blog-content">
+    <h2 class="content-title">Bloglar</h2>
+    <div class="blogs">
+      <a
+        *ngFor="let blog of blogs"
+        [routerLink]="'/blog-detail/' + blog.id"
+        class="blog-item"
+      >
+        <p class="blog-city">{{ blog.city }}</p>
+        <img [src]="blog.image" [alt]="blog.title" class="blog-img" />
+        <div class="blog-item-content">
+          <h3 class="blog-title">{{ blog.title }}</h3>
+          <p
+            class="desc"
+            [innerHTML]="blog.description.slice(0, 100) + '...'"
+          ></p>
+          <div class="blog-info">
+            <div class="author">
+              <i class="fa-solid fa-user"></i>
+              <p>{{ blog.author }}</p>
+            </div>
+            <div class="date">
+              <i class="fa-solid fa-calendar-days"></i>
+              <p>{{ formatPublicationDate(blog.publicationDate) }}</p>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

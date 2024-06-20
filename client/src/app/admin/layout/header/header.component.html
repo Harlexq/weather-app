@@ -1,0 +1,81 @@
+<div class="header">
+  <div class="header-inner">
+    <div class="header-right header-mobile">
+      <button type="button" class="header-btn" (click)="toggleSidebar()">
+        <i *ngIf="!sidebar" class="fa-solid fa-bars"></i>
+        <i *ngIf="sidebar" class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="header-left">
+      <a routerLink="/admin" class="logo">
+        <img src="./assets/imgs/logo.png" class="logo-img" alt="Weather App" />
+        <h2>Weather App</h2>
+      </a>
+      <div class="header-items">
+        <a href="/" target="_blank" class="web">
+          Siteyi Gör
+          <i class="fa-solid fa-angle-right"></i>
+        </a>
+      </div>
+    </div>
+    <div class="header-right">
+      <button class="header-btn fullscreen" (click)="toggleFullscreen()">
+        <i *ngIf="!isFullscreen" class="fa-solid fa-expand"></i>
+        <i *ngIf="isFullscreen" class="fa-solid fa-compress"></i>
+      </button>
+      <div class="dropdown" *ngIf="user">
+        <button class="user-btn" (click)="toggleDropdown()">
+          <img [src]="user.profileImage" [alt]="user.name" />
+          <p>{{ user.name }}</p>
+          <i *ngIf="!dropdown" class="fa-solid fa-angle-down"></i>
+          <i *ngIf="dropdown" class="fa-solid fa-angle-up"></i>
+        </button>
+        <div class="dropdown-content" *ngIf="dropdown">
+          <div class="head">
+            <img [src]="user.profileImage" [alt]="user.name" />
+            {{ user.name }}
+          </div>
+          <div class="dropdown-nav">
+            <a routerLink="/admin/profile-edit" class="dropdown-item">
+              <div class="dropdown-field">
+                <i class="dropdown-icon fa-solid fa-pen-to-square"></i>
+                Profili Düzenle
+              </div>
+              <i class="fa-solid fa-angle-right"></i>
+            </a>
+            <button class="dropdown-item" (click)="logout()">
+              <div class="dropdown-field">
+                <i class="dropdown-icon fa-solid fa-right-from-bracket"></i>
+                Çıkış Yap
+              </div>
+              <i class="fa-solid fa-angle-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="sidebar" *ngIf="sidebar">
+    <nav class="nav">
+      <a
+        [routerLink]="'/admin' + item.path"
+        class="nav-item"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        *ngFor="let item of navItems"
+        (click)="toggleSidebar()"
+      >
+        <i [class]="item.icon"></i>
+        {{ item.title }}
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      Copyright © 2024 |
+      <a href="https://serhanbakir.com.tr" target="_blank">Serhan Bakır</a> ve
+      <a href="https://karatasweb.com.tr/" target="_blank">Burhan Karataş</a>
+      tarafından,
+      <a href="https://www.smartict.com.tr/" target="_blank">SmartICT</a>
+      sponsorluğunda yapılmıştır.
+    </div>
+  </aside>
+</div>

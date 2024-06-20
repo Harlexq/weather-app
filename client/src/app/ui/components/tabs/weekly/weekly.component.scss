@@ -42,10 +42,10 @@
       grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
       gap: 15px;
       .weat-info-item {
-        background-color: #4e75ff;
+        background-color: #212533;
         border-radius: 4px;
         padding: 15px;
-        border: 1px solid #1f1f1f;
+        border: 1px solid #667DD4;
         box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
         cursor: pointer;
         transition: all 0.3s ease-in-out;
@@ -68,11 +68,11 @@
       grid-template-columns: repeat(auto-fit, minmax(203px, 1fr));
       gap: 15px;
       .week-info-item {
-        background-color: #181818;
+        background-color: #212533;
         border-radius: 4px;
         padding: 15px;
-        border: 1px solid #4e75ff;
-        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        border: 1px solid #667DD4;
+        box-shadow: rgb(0 0 0 / 57%) 0px 8px 24px;
         cursor: pointer;
         transition: all 0.3s ease-in-out;
         &:hover {
@@ -111,15 +111,15 @@
           .footer-read-more {
             display: inline-flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
             color: #f1f1f1;
             font-weight: 600;
-            font-size: 18px;
+            font-size: 15px;
             background-color: transparent;
             border: none;
             cursor: pointer;
+            transition: all 0.4s ease-in-out;
             &:hover {
-              transition: all 0.4s ease-in-out;
               color: #4e75ff;
             }
           }

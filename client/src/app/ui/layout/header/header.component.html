@@ -1,4 +1,4 @@
-<header class="header" [ngClass]="{ 'scrolled': isScrolled }">
+<header class="header" [ngClass]="{ scrolled: isScrolled }">
   <div class="container-fluid">
     <div class="header-inner" [ngClass]="{ 'scrolled-inner': isScrolled }">
       <button class="mobile-menu-toggle" (click)="mobileMenu()">
@@ -6,7 +6,7 @@
       </button>
       <a routerLink="/" class="logo">
         <img src="assets/imgs/logo.png" alt="Weather App" />
-        <h1>Weather<br />App</h1>
+        <h1>Weather App</h1>
       </a>
       <nav class="nav">
         <a
@@ -22,7 +22,7 @@
         <a routerLink="/auth" class="auth-item">Giriş Yap</a>
       </div>
       <ng-template #token>
-        <div class="user-content">
+        <div class="user-content" *ngIf="user">
           <button
             class="user"
             (click)="userDropwon()"
@@ -32,20 +32,17 @@
                 : {}
             "
           >
-            <img
-              src="https://freesvg.org/img/abstract-user-flat-4.png"
-              alt=""
-            />
-            <p>Serhan Bakır</p>
+            <img [src]="user.profileImage" [alt]="user.name" />
+            <p>{{ user.name }}</p>
             <i class="fa-solid fa-angle-down"></i>
           </button>
           <div class="user-dropdown" *ngIf="dropdown">
             <div class="dropdown">
-              <a routerLink="/" class="dropdown-item">
+              <a routerLink="/profile-edit" class="dropdown-item">
                 Profili Düzenle
                 <i class="fa-regular fa-pen-to-square"></i>
               </a>
-              <button class="dropdown-item">
+              <button class="dropdown-item" (click)="logout()">
                 Çıkış Yap
                 <i class="fa-solid fa-right-from-bracket"></i>
               </button>
@@ -58,7 +55,14 @@
   <div class="mobile-menu" *ngIf="menu">
     <div class="mobile-menu-container">
       <div class="head">
-        <h2>Ana Menü</h2>
+        <a routerLink="/" class="logo">
+          <img
+            src="./assets/imgs/logo.png"
+            class="logo-img"
+            alt="Weather App"
+          />
+          <h2>Weather App</h2>
+        </a>
         <button class="mobile-menu-close" (click)="mobileMenu()">
           <i class="fa-solid fa-xmark"></i>
         </button>
@@ -81,7 +85,7 @@
           type="button"
           class="search-value"
           (click)="clearInput()"
-          *ngIf="this.searchForm.get('name')?.value"
+          *ngIf="this.Name.value"
         >
           <i class="fa-solid fa-xmark"></i>
         </button>

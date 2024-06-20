@@ -1,0 +1,16 @@
+<div class="comments" *ngIf="user">
+  <div class="comment" *ngFor="let comment of comments">
+    <div class="user-img">
+      <img [src]="user.profileImage" [alt]="user.name" />
+    </div>
+    <div class="comment-content">
+      <div class="user-info">
+        <h4>{{ user.name }}</h4>
+        <p>{{ comment.publicationDate.replaceAll("-", "/") }}</p>
+      </div>
+      <div class="user-message">
+        <p>{{ comment.message }}</p>
+      </div>
+    </div>
+  </div>
+</div>

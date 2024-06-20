@@ -1,0 +1,78 @@
+<form class="form" [formGroup]="userForm" (ngSubmit)="userFormSubmit()">
+  <div class="p-inputgroup">
+    <span class="p-inputgroup-addon">
+      <i class="fa-solid fa-pen"></i>
+    </span>
+    <input pInputText placeholder="Kullanıcı Adı" [formControl]="Name" />
+  </div>
+  <ng-container *ngIf="Name.invalid && Name.dirty">
+    <p *ngIf="Name.errors?.['required']">Kullanıcı Adı Zorunludur</p>
+  </ng-container>
+  <div class="p-inputgroup">
+    <span class="p-inputgroup-addon">
+      <i class="fa-solid fa-city"></i>
+    </span>
+    <input pInputText placeholder="E-Mail Adresi" [formControl]="Email" />
+  </div>
+  <ng-container *ngIf="Email.invalid && Email.dirty">
+    <p *ngIf="Email.errors?.['required']">E-Mail Adresi Zorunludur</p>
+    <p *ngIf="Email.errors?.['email']">
+      E-Mail Adresini Doğru Formatda Yazınız
+    </p>
+  </ng-container>
+  <div class="p-inputgroup">
+    <span class="p-inputgroup-addon">
+      <i class="fa-solid fa-city"></i>
+    </span>
+    <input pInputText placeholder="Bulunduğu Ülke" [formControl]="Country" />
+  </div>
+  <ng-container *ngIf="Country.invalid && Country.dirty">
+    <p *ngIf="Country.errors?.['required']">Ülke İsmi Zorunludur</p>
+  </ng-container>
+  <div class="p-inputgroup">
+    <span class="p-inputgroup-addon">
+      <i class="fa-solid fa-city"></i>
+    </span>
+    <input pInputText placeholder="Bulunduğu Şehir" [formControl]="City" />
+  </div>
+  <ng-container *ngIf="City.invalid && City.dirty">
+    <p *ngIf="City.errors?.['required']">Şehir İsmi Zorunludur</p>
+  </ng-container>
+  <div class="p-inputgroup">
+    <label for="gender">Cinsiyet</label>
+    <div class="p-formgroup-inline">
+      <p-radioButton
+        name="gender"
+        value="Erkek"
+        [formControl]="Gender"
+        label="Erkek"
+      />
+      <p-radioButton
+        name="gender"
+        value="Kadın"
+        [formControl]="Gender"
+        label="Kadın"
+      />
+    </div>
+  </div>
+  <ng-container *ngIf="Gender.invalid && Gender.dirty">
+    <p *ngIf="Gender.errors?.['required']">Kullanıcı Cinsiyeti Zorunludur</p>
+  </ng-container>
+  <p-fileUpload
+    mode="basic"
+    chooseLabel="Kullanıcı Fotoğrafı"
+    accept=".jpg, .jpeg, .png"
+    (onSelect)="onFileSelected($event)"
+  />
+  <div class="form-submit">
+    <p-button
+      label="Kullanıcıyı Güncelle"
+      icon="fa-solid fa-check"
+      iconPos="right"
+      severity="success"
+      size="small"
+      type="submit"
+      [disabled]="!userForm.dirty || !userForm.valid"
+    />
+  </div>
+</form>

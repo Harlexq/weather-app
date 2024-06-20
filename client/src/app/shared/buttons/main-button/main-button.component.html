@@ -1,0 +1,12 @@
+<ng-container *ngIf="path; else noPath">
+  <a [routerLink]="path" class="btn">
+    <span>{{ content }}</span>
+    <i *ngIf="icon" [class]="icon"></i>
+  </a>
+</ng-container>
+<ng-template #noPath>
+  <button class="btn" [disabled]="disabed">
+    <span>{{ content }}</span>
+    <i *ngIf="icon" [class]="icon"></i>
+  </button>
+</ng-template>

@@ -1,0 +1,38 @@
+<breadcrumb [breadcrumbItems]="['Yorumlar']" />
+<p-toast />
+<p-confirmDialog [style]="{ width: '500px' }" />
+<p-table
+  [value]="comments"
+  [paginator]="true"
+  [rows]="5"
+  [showCurrentPageReport]="true"
+  currentPageReportTemplate="{first} ile {last} Toplam: {totalRecords}"
+  [rowsPerPageOptions]="[5, 20, 30]"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>ID</th>
+      <th>Yorumu Yapan Kişi</th>
+      <th style="width: 35%">Yorum Metni</th>
+      <th>Yorum Yapılma Tarihi</th>
+      <th>Yorum Yapılan Şehir</th>
+      <th>İşlemler</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-comment>
+    <tr>
+      <td>{{ comment.id }}</td>
+      <td>{{ getUserNameById(comment.personId) }}</td>
+      <td>{{ comment.message.slice(0, 100) + "..." }}</td>
+      <td>{{ formatPublicationDate(comment.publicationDate) }}</td>
+      <td>{{ comment.city | capitalize }}</td>
+      <td>
+        <p-button
+          severity="danger"
+          icon="fa-solid fa-trash"
+          (click)="commentDelete(comment.id)"
+        />
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

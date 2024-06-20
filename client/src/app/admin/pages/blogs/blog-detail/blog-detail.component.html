@@ -1,0 +1,20 @@
+<div *ngIf="blog">
+  <img class="blog-img" [src]="blog.image" [alt]="blog.title" />
+  <div class="blog-info">
+    <div class="author">
+      <i class="fa-solid fa-user"></i>
+      <p>Yazar:{{ blog.author }}</p>
+    </div>
+    <div class="date">
+      <i class="fa-solid fa-calendar-days"></i>
+      <p>
+        Yayınlanma Tarihi: {{ formatPublicationDate(blog.publicationDate) }}
+      </p>
+    </div>
+  </div>
+  <div class="blog-city">
+    <i class="fa-solid fa-location-dot"></i>
+    <p>Şehir: {{ blog.city }}</p>
+  </div>
+  <p [innerHTML]="blog.description"></p>
+</div>

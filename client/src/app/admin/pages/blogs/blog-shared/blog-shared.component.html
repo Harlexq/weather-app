@@ -1,0 +1,52 @@
+<form
+  class="form"
+  [formGroup]="blogForm"
+  (ngSubmit)="
+    selectedBlogId !== null ? blogFormSubmit(selectedBlogId) : blogFormSubmit()
+  "
+>
+  <div class="p-inputgroup">
+    <span class="p-inputgroup-addon">
+      <i class="fa-solid fa-pen"></i>
+    </span>
+    <input pInputText placeholder="Blog Başlığı" [formControl]="Title" />
+  </div>
+  <ng-container *ngIf="Title.invalid && Title.dirty">
+    <p *ngIf="Title.errors?.['required']">Blog Başlığı Zorunludur</p>
+  </ng-container>
+  <div class="p-inputgroup">
+    <span class="p-inputgroup-addon">
+      <i class="fa-solid fa-city"></i>
+    </span>
+    <input pInputText placeholder="Blog Şehri" [formControl]="City" />
+  </div>
+  <ng-container *ngIf="City.invalid && City.dirty">
+    <p *ngIf="City.errors?.['required']">Blog Şehri Zorunludur</p>
+  </ng-container>
+  <p-editor
+    id="description"
+    placeholder="Blog Açıklaması"
+    [formControl]="Description"
+    [style]="{ height: '320px' }"
+  />
+  <ng-container *ngIf="Description.invalid && Description.dirty">
+    <p *ngIf="Description.errors?.['required']">Blog Açıklaması Zorunludur</p>
+  </ng-container>
+  <p-fileUpload
+    mode="basic"
+    chooseLabel="Blog Fotoğrafı"
+    accept=".jpg, .jpeg, .png"
+    (onSelect)="onFileSelected($event)"
+  />
+  <div class="form-submit">
+    <p-button
+      [label]="selectedBlogId == null ? 'Blog Ekle' : 'Bloğu Güncelle'"
+      icon="fa-solid fa-check"
+      iconPos="right"
+      severity="success"
+      size="small"
+      [disabled]="!blogForm.valid"
+      type="submit"
+    />
+  </div>
+</form>

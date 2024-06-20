@@ -1,2 +1,8 @@
-flask
-flask_restful
+Flask
+Flask-JWT-Extended
+Flask-CORS
+Flask-MySQLdb
+Flask-RESTful
+python-dotenv
+passlib
+avatar-generator

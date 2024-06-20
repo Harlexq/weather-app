@@ -1,9 +1,7 @@
+<p-toast />
 <div class="comments" *ngIf="logged; else elseLogged">
-  <div class="user-info">
-    <img
-      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRSGsjVqQjJxn28kUedTik3qXE7x4mCtuPjVu1t6wa8-06bBu-lISI9sLFqZIBIQWvTPQ&usqp=CAU"
-      alt=""
-    />
+  <div class="user-info" *ngIf="user">
+    <img [src]="user.profileImage" [alt]="user.name" />
   </div>
   <form
     class="comment-content"
@@ -20,7 +18,7 @@
           <ng-container *ngIf="Message.invalid && Message.dirty">
             <p *ngIf="Message.errors?.['required']">Mesaj alanı zorunludur.</p>
             <p *ngIf="Message.errors?.['minlength']">
-              Mesajınız minumum 300 karakter olmalıdır.
+              Mesajınız minumum 50 karakter olmalıdır.
             </p>
             <p *ngIf="Message.errors?.['maxlength']">
               Mesajınız maximum 600 karakter olmalıdır.
@@ -85,3 +83,5 @@
     </div>
   </div>
 </ng-template>
+
+<list-comments />

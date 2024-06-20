@@ -1,0 +1,28 @@
+<aside class="sidebar">
+  <div class="head">
+    <a routerLink="/admin" class="logo">
+      <img src="./assets/imgs/logo.png" class="logo-img" alt="Weather App" />
+      <h2>Weather App</h2>
+    </a>
+  </div>
+  <nav class="nav">
+    <a
+      [routerLink]="'/admin' + item.path"
+      class="nav-item"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      *ngFor="let item of navItems"
+    >
+      <i [class]="item.icon"></i>
+      {{ item.title }}
+    </a>
+  </nav>
+  <div class="sidebar-footer">
+    Copyright © 2024 |
+    <a href="https://serhanbakir.com.tr" target="_blank">Serhan Bakır</a> ve
+    <a href="https://karatasweb.com.tr/" target="_blank">Burhan Karataş</a>
+    tarafından,
+    <a href="https://www.smartict.com.tr/" target="_blank">SmartICT</a>
+    sponsorluğunda yapılmıştır.
+  </div>
+</aside>

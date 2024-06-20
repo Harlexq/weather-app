@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class HttpClientService {
-  apiUrl: string = "environment.apiUrl";
+  apiUrl: string = environment.weatherAppApiUrl;
 
   constructor(private http: HttpClient) {}
 

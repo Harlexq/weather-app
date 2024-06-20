@@ -1,0 +1,22 @@
+<div class="city">
+  <div class="container">
+    <h2 class="city-title">En İyi Şehir Tahmini</h2>
+    <p class="city-desc">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit Bibendum cursus
+      quis.
+    </p>
+    <div class="citys">
+      <a
+        routerLink="/weather-forecasts"
+        [queryParams]="{ city: city.path }"
+        class="city-item"
+        *ngFor="let city of citys"
+      >
+        <div class="city-flag">
+          <img [src]="city.flag" [alt]="city.name" />
+        </div>
+        <p>{{ city.name }}</p>
+      </a>
+    </div>
+  </div>
+</div>

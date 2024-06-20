@@ -1,12 +1,19 @@
 .banner {
+  height: 100vh;
   .banner-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
     gap: 30px;
+    @media only screen and (max-width: 768px) {
+      flex-direction: column;
+    }
     .banner-col {
       flex: 1 0 calc(50% - 30px);
+      width: 100%;
+      @media only screen and (max-width: 768px) {
+        flex: 1 0 calc(100% - 30px);
+      }
       h2 {
         font-size: 40px;
         font-weight: 600;
@@ -107,14 +114,18 @@
         }
         h3 {
           font-size: 200px;
+          @media only screen and (max-width: 768px) {
+            font-size: 100px;
+          }
         }
         .weather-list {
           display: flex;
           align-items: center;
           justify-content: center;
+          flex-wrap: wrap;
           gap: 10px;
           .weather-item {
-            flex: 1 0 33.33%;
+            flex: 1 0 16.6%;
             .weather-img {
               width: 40px;
             }

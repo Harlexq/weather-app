@@ -6,7 +6,6 @@ export interface User {
   password: string;
   createdDate: string;
   gender: string;
-  birthdate: string;
   country: string;
   city: string;
   token: string;

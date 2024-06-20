@@ -2,8 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { User } from '../models/User';
-
 @Injectable({
   providedIn: 'root',
 })
@@ -12,30 +10,59 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  login(
-    data: { email: string; password: string },
-    callBack: (data: { email: string; password: string }) => void
-  ) {
-    this.http.post<User>(this.apiUrl + 'login', data).subscribe({
+  login(endpoint: string, data: any, callBack: (data: any) => void) {
+    this.http.post<any>(this.apiUrl + endpoint, data).subscribe({
       next: (res) => {
         callBack(res);
-        this.router.navigateByUrl('/');
-        localStorage.setItem('token', res.token);
+        if (endpoint === 'login') {
+          this.router.navigateByUrl('/');
+          localStorage.setItem('token', res.token);
+          localStorage.setItem('userId', res.id);
+        } else {
+          this.router.navigateByUrl('/admin');
+          localStorage.setItem('adminToken', res.token);
+          localStorage.setItem('adminId', res.id);
+        }
       },
     });
   }
 
-  logout() {
-    localStorage.removeItem('token');
-    this.router.navigateByUrl('/');
+  checkIsAuth(tokenName: string): boolean {
+    const token = localStorage.getItem(tokenName);
+    if (token) return true;
+
+    tokenName === 'adminToken'
+      ? this.router.navigateByUrl('/admin/auth')
+      : this.router.navigateByUrl('/auth');
+
+    return false;
   }
 
-  signup(data: User, callBack: (data: User) => void) {
-    this.http.post<User>(this.apiUrl + 'signup', data).subscribe({
+  logout(endpoint: string) {
+    if (endpoint === 'login') {
+      localStorage.removeItem('token');
+      localStorage.removeItem('userId');
+      this.router.navigateByUrl('/auth');
+    } else {
+      localStorage.removeItem('adminToken');
+      localStorage.removeItem('adminId');
+      this.router.navigateByUrl('/admin/auth');
+    }
+  }
+
+  signup(endpoint: string, data: any, callBack: (data: any) => void) {
+    this.http.post<any>(this.apiUrl + endpoint, data).subscribe({
       next: (res) => {
         callBack(res);
-        this.router.navigateByUrl('/');
-        localStorage.setItem('token', res.token);
+        if (endpoint === 'signup') {
+          this.router.navigateByUrl('/');
+          localStorage.setItem('token', res.token);
+          localStorage.setItem('userId', res.id);
+        } else {
+          this.router.navigateByUrl('/admin');
+          localStorage.setItem('adminToken', res.token);
+          localStorage.setItem('adminId', res.id);
+        }
       },
     });
   }

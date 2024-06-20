@@ -1,0 +1,16 @@
+.user-img {
+  width: 10%;
+  img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+}
+
+p-button {
+  margin-right: 5px;
+  &:last-child {
+    margin: 0;
+  }
+}

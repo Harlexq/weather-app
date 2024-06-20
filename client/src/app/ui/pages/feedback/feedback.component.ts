@@ -5,17 +5,24 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { MessageService } from 'primeng/api';
+import { HttpClientService } from 'src/app/services/http-client.service';
 
 @Component({
   selector: 'app-feedback',
   templateUrl: './feedback.component.html',
   styleUrls: ['./feedback.component.scss'],
+  providers: [MessageService],
 })
 export class FeedbackComponent {
   feedbackForm!: FormGroup;
   selectedRating: number = 0;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private http: HttpClientService,
+    private messageService: MessageService
+  ) {}
 
   ngOnInit(): void {
     this.feedbackFormCreate();
@@ -41,6 +48,13 @@ export class FeedbackComponent {
 
   send() {
     if (this.feedbackForm.valid) {
+      this.http.post('feedback', this.feedbackForm.value, (res) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Form Başarıyla Gönderilmiştir',
+        });
+      });
     }
   }
 

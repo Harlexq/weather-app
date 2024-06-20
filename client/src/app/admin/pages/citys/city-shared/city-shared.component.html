@@ -1,0 +1,43 @@
+<form
+  class="form"
+  [formGroup]="cityForm"
+  (ngSubmit)="
+    selectedCityId !== null ? cityFormSubmit(selectedCityId) : cityFormSubmit()
+  "
+>
+  <div class="p-inputgroup">
+    <span class="p-inputgroup-addon">
+      <i class="fa-solid fa-pen"></i>
+    </span>
+    <input pInputText placeholder="Şehir İsmi" [formControl]="Name" />
+  </div>
+  <ng-container *ngIf="Name.invalid && Name.dirty">
+    <p *ngIf="Name.errors?.['required']">Şehir İsmi Zorunludur</p>
+  </ng-container>
+  <div class="p-inputgroup">
+    <span class="p-inputgroup-addon">
+      <i class="fa-solid fa-city"></i>
+    </span>
+    <input pInputText placeholder="Şehir Linki" [formControl]="Path" />
+  </div>
+  <ng-container *ngIf="Path.invalid && Path.dirty">
+    <p *ngIf="Path.errors?.['required']">Şehir Linki Zorunludur</p>
+  </ng-container>
+  <p-fileUpload
+    mode="basic"
+    chooseLabel="Şehir Bayrağı"
+    accept=".jpg, .jpeg, .png"
+    (onSelect)="onFileSelected($event)"
+  />
+  <div class="form-submit">
+    <p-button
+      [label]="selectedCityId == null ? 'Şehir Ekle' : 'Şehri Güncelle'"
+      icon="fa-solid fa-check"
+      iconPos="right"
+      severity="success"
+      size="small"
+      type="submit"
+      [disabled]="!cityForm.valid"
+    />
+  </div>
+</form>

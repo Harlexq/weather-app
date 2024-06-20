@@ -64,7 +64,7 @@ export class BannerComponent {
 
   search() {
     if (this.citySearchForm.valid) {
-      this.router.navigate(['/weather-conditions'], {
+      this.router.navigate(['/weather-forecasts'], {
         queryParams: { city: this.Name.value },
       });
     }

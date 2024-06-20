@@ -27,12 +27,12 @@
         resize: none;
         font-size: 14px;
         padding: 15px;
-        color: #f1f1f1;
-        border: 2px solid #4e75ff;
-        background-color: #1f1f1f;
+        color: #15161A;
+        border: 2px solid #676D80;
+        background-color: #6D7BAA;
         outline: none;
         &::placeholder {
-          color: #f1f1f1;
+          color: #15161A;
         }
       }
       .textarea-ets {
@@ -89,7 +89,7 @@
     flex-direction: column;
     justify-content: center;
     border-radius: 8px;
-    background: rgba(255, 255, 255, 0.3);
+    background: rgb(204 204 204 / 70%);
     backdrop-filter: blur(10px);
     h2 {
       color: #1f1f1f;

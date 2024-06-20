@@ -1,57 +1,81 @@
 <div class="feedback">
-  <div class="">
-    <div class="">
-      <h2>Geri Bildirim</h2>
+  <h2>Geri Bildirim</h2>
+  <form [formGroup]="feedbackForm" (ngSubmit)="send()" class="form">
+    <input-control
+      placeholder="İsim"
+      [fb]="FirstName"
+      [form]="feedbackForm"
+      icon="fa-solid fa-user"
+      iconId="name"
+    />
+    <ng-container *ngIf="FirstName.invalid && FirstName.dirty">
+      <p *ngIf="FirstName.errors?.['required']">İsim Alanı Zorunludur</p>
+    </ng-container>
+    <input-control
+      placeholder="Soyisim"
+      [fb]="LastName"
+      [form]="feedbackForm"
+      icon="fa-solid fa-user"
+      iconId="lastname"
+    />
+    <ng-container *ngIf="LastName.invalid && LastName.dirty">
+      <p *ngIf="LastName.errors?.['required']">Soyisim Alanı Zorunludur</p>
+    </ng-container>
+    <input-control
+      type="email"
+      placeholder="E-Mail"
+      [fb]="Email"
+      [form]="feedbackForm"
+      icon="fa-solid fa-envelope"
+      iconId="mail"
+    />
+    <ng-container *ngIf="Email.invalid && Email.dirty">
+      <p *ngIf="Email.errors?.['required']">E-Mail Alanı Zorunludur</p>
+      <p *ngIf="Email.errors?.['email']">
+        E-Mail Adresini Doğru Formatda Yazınız
+      </p>
+    </ng-container>
+    <input-control
+      type="tel"
+      placeholder="Telefon No"
+      [fb]="Phone"
+      [form]="feedbackForm"
+      icon="fa-solid fa-phone"
+      iconId="phone"
+    />
+    <ng-container *ngIf="Phone.invalid && Phone.dirty">
+      <p *ngIf="Phone.errors?.['required']">Telefon No Alanı Zorunludur</p>
+    </ng-container>
+    <textarea [formControl]="Message" placeholder="Mesaj"></textarea>
+    <ng-container *ngIf="Message.invalid && Message.dirty">
+      <p *ngIf="Message.errors?.['required']">Mesaj Alanı Zorunludur</p>
+      <p *ngIf="Message.errors?.['minlength']">
+        Mesajınız Minumum 100 Karakter Olmalıdır
+      </p>
+      <p *ngIf="Message.errors?.['maxlength']">
+        Mesajınız Maximum 600 Karakter Olmalıdır
+      </p>
+    </ng-container>
+    <div class="rating">
+      <button
+        class="star"
+        type="button"
+        *ngFor="let numbers of [1, 2, 3, 4, 5]; let index = index"
+        (click)="setRating(index + 1)"
+        [ngClass]="{ filled: index < selectedRating }"
+      >
+        &#9733;
+      </button>
     </div>
-    <div class="form-container">
-      <form [formGroup]="feedbackForm" (ngSubmit)="send()" class="form">
-        <div class="" style="width: 100%">
-          <input-control
-            placeholder="İsim"
-            [fb]="FirstName"
-            [form]="feedbackForm"
-          />
-        </div>
-        <div class="">
-          <input-control
-            placeholder="Soyisim"
-            [fb]="LastName"
-            [form]="feedbackForm"
-          />
-        </div>
-        <div class="">
-          <input-control
-            type="email"
-            placeholder="E-Mail"
-            [fb]="Email"
-            [form]="feedbackForm"
-          />
-        </div>
-        <div class="">
-          <input-control
-            type="tel"
-            placeholder="Telefon No"
-            [fb]="Phone"
-            [form]="feedbackForm"
-          />
-        </div>
-        <div class="">
-          <textarea [formControl]="Message" placeholder="Mesaj"></textarea>
-        </div>
-        <div class="">
-          <div class="rating">
-            <button
-              class="star"
-              *ngFor="let numbers of [1, 2, 3, 4, 5]; let i = index"
-              (click)="setRating(i + 1)"
-              [ngClass]="{ filled: i < selectedRating }"
-            >
-              &#9733;
-            </button>
-          </div>
-          <input-control type="hidden" [fb]="Rating" [form]="feedbackForm" />
-        </div>
-      </form>
+    <input-control type="hidden" [fb]="Rating" [form]="feedbackForm" />
+    <div class="submit">
+      <main-button
+        content="Gönder"
+        [disabed]="feedbackForm.invalid"
+        icon="fa-solid fa-angle-right"
+      />
     </div>
-  </div>
+  </form>
 </div>
+
+<p-toast />

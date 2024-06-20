@@ -5,7 +5,7 @@
     h2 {
       font-size: 40px;
       font-weight: 600;
-      color: #fff;
+      color: #1f1f1f;
     }
     p {
       font-size: 25px;
@@ -33,19 +33,20 @@
         p {
           font-size: 20px;
           font-weight: 600;
-          color: #fff;
+          color: #1f1f1f;
         }
       }
     }
     .weat-info {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
       gap: 15px;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
       .weat-info-item {
-        background-color: #4e75ff;
+        background-color: #657dd5;
         border-radius: 4px;
         padding: 15px;
-        border: 1px solid #fff;
+        border: 1px solid #212533;
+        color: #f1f1f1;
         box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
         cursor: pointer;
         transition: all 0.3s ease-in-out;
@@ -64,14 +65,14 @@
     }
     .weat-info {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(203px, 1fr));
       gap: 15px;
+      grid-template-columns: repeat(auto-fit, minmax(203px, 1fr));
       .week-info-item {
-        background-color: #e6e6e6;
+        background-color: #212533;
         border-radius: 4px;
         padding: 15px;
-        border: 1px solid #fff;
-        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        border: 1px solid #667dd4;
+        box-shadow: rgb(0 0 0 / 57%) 0px 8px 24px;
         cursor: pointer;
         transition: all 0.3s ease-in-out;
         &:hover {
@@ -110,15 +111,15 @@
           .footer-read-more {
             display: inline-flex;
             align-items: center;
-            gap: 15px;
-            color: #1f1f1f;
+            gap: 10px;
+            color: #f1f1f1;
             font-weight: 600;
-            font-size: 18px;
+            font-size: 15px;
             background-color: transparent;
             border: none;
             cursor: pointer;
+            transition: all 0.4s ease-in-out;
             &:hover {
-              transition: all 0.4s ease-in-out;
               color: #4e75ff;
             }
           }
