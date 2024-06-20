@@ -1,4 +1,4 @@
-# Hava Durumu Uygulaması
+# Hava Durumu Uygulaması (Weather App)
 
 ## Proje Hakkında
 
@@ -28,14 +28,16 @@ Bu proje, kullanıcıların anlık, günlük ve haftalık hava durumu bilgilerin
 - **OpenLayer**
 - **PrimeNG**
 - **Chart.js**
+- **Python**
+- **Flask**
 
 ## Kurulum ve Başlatma
 
 1. Projeyi klonlayın:
 
 ```sh
-   git clone <proje-repo-url>
-   cd <proje-dizini>
+   git clone https://github.com/Harlexq/weather-app.git
+   cd .\client\
 ```
 
 2. Gerekli modülleri indirin:
