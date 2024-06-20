@@ -55,22 +55,27 @@ export class HeaderComponent {
       path: '/weather-forecasts',
     },
     {
-      id: 4,
+      id: 3,
       title: 'Harita',
       path: '/map',
     },
     {
-      id: 6,
+      id: 4,
+      title: 'Hava Tahmin Grafiği',
+      path: '/weather-trends',
+    },
+    {
+      id: 5,
       title: 'Hakkımızda',
       path: '/about',
     },
     {
-      id: 7,
+      id: 6,
       title: 'Bloglar',
       path: '/blogs',
     },
     {
-      id: 8,
+      id: 7,
       title: 'Geri Bildirim',
       path: '/feedback',
     },
