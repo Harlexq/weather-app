@@ -36,9 +36,9 @@ if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
 
-def send_email(fristName, lastName, email, phone, rating, message):
-    msg = Message("WEATHER-APP DEĞERLENDİRMEN VAR", sender="help.dershane@gmail.com", recipients=["burhankaratas771@gmail.com"])
-    msg.body = "FristName: " + fristName + "\n LastName: " + lastName + "\n Email: " + email + "\n Phone: " + phone + "\n Rating: " + rating + "\n Message: " + message
+def send_email(firstName, lastName, email, phone, rating, message):
+    msg = Message("WEATHER-APP Geri Bildirim Formundan İleti", sender="help.dershane@gmail.com", recipients=["serhanbakir5@gmail.com"])
+    msg.body = "FristName: " + firstName + "\n LastName: " + lastName + "\n Email: " + email + "\n Phone: " + phone + "\n Rating: " + rating + "\n Message: " + message
     mail.send(msg)
 
 class AdminSignup(Resource):
