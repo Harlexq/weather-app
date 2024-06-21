@@ -867,14 +867,14 @@ class FeedBack(Resource):
     def post(self):
         try:
             data = request.get_json()
-            fristName = data.get('fristName')
+            firstName = data.get('firstName')
             lastName = data.get('lastName')
             email = data.get('email')
             phone = data.get('phone')
             rating = data.get('rating')
             message = data.get('message')
 
-            send_email(fristName, lastName, email, phone, rating, message)
+            send_email(firstName, lastName, email, phone, rating, message)
 
             return {'message': 'success'}, 200
         
