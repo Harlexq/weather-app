@@ -1,11 +1,12 @@
 from flask import jsonify, request, send_from_directory
 from flask_restful import Resource, reqparse
 from flask_jwt_extended import JWTManager
+from flask_mail import Message
 from flask_cors import CORS
 from dotenv import load_dotenv
 from datetime import datetime
 from passlib.hash import md5_crypt
-from config import create_app, init_api, init_mysql
+from config import create_app, init_api, init_mysql, init_mail
 from views.functions import  generate_salt, generate_salted_token, allowed_file
 import datetime
 import datetime as dt
@@ -15,6 +16,8 @@ import os
 app = create_app()
 mysql = init_mysql(app)
 api = init_api(app)
+mail = init_mail(app)
+
 jwt = JWTManager(app)
 app.config['JWT_SECRET_KEY'] = str(os.getenv('JWT_SECRET_KEY'))
 app.config['JWT_ACCESS_TOKEN_EXPIRES'] = datetime.timedelta(minutes=15)
@@ -31,6 +34,13 @@ def allowed_file(filename):
 
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
+
+
+def send_email(fristName, lastName, email, phone, rating, message):
+    msg = Message("WEATHER-APP DEĞERLENDİRMEN VAR", sender="help.dershane@gmail.com", recipients=["burhankaratas771@gmail.com"])
+    msg.body = "FristName: " + fristName + "\n LastName: " + lastName + "\n Email: " + email + "\n Phone: " + phone + "\n Rating: " + rating + "\n Message: " + message
+    mail.send(msg)
+
 class AdminSignup(Resource):
     def post(self):
         try:
@@ -853,6 +863,24 @@ class Comment(Resource):
         except Exception as e:
             return {'error': 'An error occurred: {}'.format(str(e))}, 500
 
+class FeedBack(Resource):
+    def post(self):
+        try:
+            data = request.get_json()
+            fristName = data.get('fristName')
+            lastName = data.get('lastName')
+            email = data.get('email')
+            phone = data.get('phone')
+            rating = data.get('rating')
+            message = data.get('message')
+
+            send_email(fristName, lastName, email, phone, rating, message)
+
+            return {'message': 'success'}, 200
+        
+        except Exception as e:
+            return {'error': 'An error occurred: {}'.format(str(e))}, 500
+
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
@@ -884,6 +912,8 @@ api.add_resource(Comments, '/comments')
 api.add_resource(CommentCreate, '/commentCreate')
 api.add_resource(Comment, '/comment/<int:comment_id>')
 api.add_resource(CommentsByCity, '/comments/city/<string:city_name>')
+
+api.add_resource(FeedBack, "/feedback")
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 3500))
