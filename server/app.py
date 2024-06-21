@@ -38,7 +38,7 @@ if not os.path.exists(UPLOAD_FOLDER):
 
 def send_email(firstName, lastName, email, phone, rating, message):
     msg = Message("WEATHER-APP Geri Bildirim Formundan İleti", sender="help.dershane@gmail.com", recipients=["serhanbakir5@gmail.com"])
-    msg.body = "FristName: " + firstName + "\n LastName: " + lastName + "\n Email: " + email + "\n Phone: " + phone + "\n Rating: " + rating + "\n Message: " + message
+    msg.body = "FirstName: " + firstName + "\n LastName: " + lastName + "\n Email: " + email + "\n Phone: " + phone + "\n Rating: " + rating + "\n Message: " + message
     mail.send(msg)
 
 class AdminSignup(Resource):
