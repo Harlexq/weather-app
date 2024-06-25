@@ -871,10 +871,13 @@ class FeedBack(Resource):
             lastName = data.get('lastName')
             email = data.get('email')
             phone = data.get('phone')
-            rating = data.get('rating')
             message = data.get('message')
 
-            send_email(firstName, lastName, email, phone, rating, message)
+            rating = data.get('rating')
+            if not isinstance(rating, int):
+                return {"error": "Rating must be an integer."}, 400
+
+            send_email(firstName, lastName, email, phone, str(rating), message)
 
             return {'message': 'success'}, 200
         
