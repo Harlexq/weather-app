@@ -31,7 +31,7 @@ Bu proje, kullanıcıların anlık, günlük ve haftalık hava durumu bilgilerin
 - **Python**
 - **Flask**
 
-## Kurulum ve Başlatma
+## Ön Uç Kurulum ve Başlatma
 
 1. Projeyi klonlayın:
 
@@ -53,6 +53,28 @@ Bu proje, kullanıcıların anlık, günlük ve haftalık hava durumu bilgilerin
 ```
 
 4. Uygulama, 3500 portunda çalışmaya başlayacaktır.
+
+## Arka Uç Kurulum ve Başlatma
+
+1. Projeyi klonlayın:
+
+```sh
+   cd .\server\
+```
+
+2. Gerekli modülleri indirin:
+
+```sh
+    pip install
+```
+
+3. Gerekli modülleri indirin:
+
+```sh
+   py app.py
+```
+
+4. Uygulama, http://127.0.0.1:3500 adresinde çalışmaya başlayacaktır.
 
 ## Kullanım
 
