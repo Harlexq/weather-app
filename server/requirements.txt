@@ -6,4 +6,3 @@ Flask-RESTful
 python-dotenv
 passlib
 avatar-generator
-gunicorn
